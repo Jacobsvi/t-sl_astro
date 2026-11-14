@@ -10,6 +10,8 @@ import KnapPrimary from "../components/Knap_primary.astro";
 import KnapSecondary from "../components/Knap_secondary.astro";
 import UdstyrCardIndex from "../components/Udstyr_card_index.astro";
 
+import Layout from "../layouts/layout.astro";
+
 
 const apiurl = "https://uyxpjeeivebwemzealvq.supabase.co/rest/v1/";
 const equipmentTableName = "equipment";
@@ -63,8 +65,15 @@ console.log("staffData", staffData);
 		<title>Astro</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+
+
+<Layout>
+  <h1>Tech & Story Lab</h1>
+  <p>Her kommer forsidens indhold.</p>
+</Layout>
+
 	</body>
+
 
 
 
