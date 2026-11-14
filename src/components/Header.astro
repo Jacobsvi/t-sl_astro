@@ -1,0 +1,353 @@
+---
+const { logoSrc = "" } = Astro.props;
+---
+
+<header class="site-header" data-site-header>
+  <div class="header-bar">
+    <a class="logo-link" href="/" aria-label="Tech & Story Lab – forside">
+      {
+        logoSrc ? (
+          <img
+            class="logo"
+            src={logoSrc}
+            alt="Tech & Story Lab"
+            width="130"
+            height="130"
+          />
+        ) : (
+          <span class="logo-placeholder" aria-hidden="true">
+            Tech &amp;
+            <br />
+            Story Lab
+          </span>
+        )
+      }
+    </a>
+
+    <button
+      type="button"
+      class="menu-toggle"
+      aria-label="Åbn menu"
+      aria-expanded="false"
+      aria-controls="navLinks"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <nav
+    id="navLinks"
+    class="menu-panel"
+    aria-label="Hovednavigation"
+    hidden
+  >
+    <div class="menu-inner">
+      <div class="image-placeholder" aria-hidden="true">
+        Billede kommer her
+      </div>
+
+      <ul class="menu-links">
+        <li><a href="/">Forside</a></li>
+        <li><a href="/udstyr">Udstyr</a></li>
+        <li><a href="/inspiration">Inspiration</a></li>
+        <li><a href="/help">Hjælp og vejledning</a></li>
+        <li><a href="/events">Events &amp; Workshops</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const header =
+    document.querySelector<HTMLElement>("[data-site-header]");
+
+  const menuToggle =
+    header?.querySelector<HTMLButtonElement>(".menu-toggle");
+
+  const navLinks =
+    header?.querySelector<HTMLElement>("#navLinks");
+
+  if (menuToggle && navLinks) {
+    function setMenuOpen(isOpen: boolean) {
+      if (!menuToggle || !navLinks) return;
+
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute(
+        "aria-label",
+        isOpen ? "Luk menu" : "Åbn menu"
+      );
+
+      navLinks.hidden = !isOpen;
+    }
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen =
+        menuToggle.getAttribute("aria-expanded") === "true";
+
+      setMenuOpen(!isOpen);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      const isOpen =
+        menuToggle.getAttribute("aria-expanded") === "true";
+
+      if (event.key === "Escape" && isOpen) {
+        setMenuOpen(false);
+        menuToggle.focus();
+      }
+    });
+
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        setMenuOpen(false);
+      });
+    });
+  }
+</script>
+
+<style>
+  .site-header {
+    --header-color: #6d003e;
+    --menu-color: #ffc5cd;
+    --icon-color: #ff8d9d;
+
+    width: 100%;
+    background-color: var(--header-color);
+  }
+
+  .site-header,
+  .site-header * {
+    box-sizing: border-box;
+  }
+
+  .header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+
+    width: 100%;
+    max-width: 1512px;
+    height: 170px;
+    margin-inline: auto;
+    padding: 10px clamp(24px, 6.35vw, 96px);
+  }
+
+  .logo-link {
+    display: block;
+    flex-shrink: 0;
+    border-radius: 50%;
+  }
+
+  .logo {
+    display: block;
+    width: 130px;
+    height: 130px;
+    object-fit: contain;
+  }
+
+  .logo-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background-color: rgb(255 141 157 / 15%);
+    color: white;
+
+    font-family: Georgia, serif;
+    font-size: 24px;
+    font-style: italic;
+    line-height: 1.15;
+    text-align: center;
+  }
+
+  .menu-toggle {
+    position: relative;
+    flex-shrink: 0;
+
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .menu-toggle span {
+    position: absolute;
+    left: 6px;
+
+    display: block;
+    width: 36px;
+    height: 2px;
+    background-color: var(--icon-color);
+
+    transition: transform 180ms ease, opacity 180ms ease;
+  }
+
+  .menu-toggle span:nth-child(1) {
+    top: 14px;
+  }
+
+  .menu-toggle span:nth-child(2) {
+    top: 23px;
+  }
+
+  .menu-toggle span:nth-child(3) {
+    top: 32px;
+  }
+
+  /* De tre streger bliver til et kryds, når menuen er åben. */
+  .menu-toggle[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+
+  .menu-toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  .menu-toggle:hover {
+    background-color: rgb(255 255 255 / 8%);
+  }
+
+  .logo-link:focus-visible,
+  .menu-toggle:focus-visible {
+    outline: 3px solid white;
+    outline-offset: 5px;
+  }
+
+  .menu-panel {
+    background-color: var(--menu-color);
+  }
+
+  /* Sikrer, at menuen er skjult, når JavaScript sætter hidden. */
+  .menu-panel[hidden] {
+    display: none;
+  }
+
+  .menu-inner {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    align-items: center;
+    gap: 40px;
+
+    width: 100%;
+    max-width: 1512px;
+    min-height: 280px;
+    margin-inline: auto;
+    padding: 16px clamp(24px, 6.35vw, 96px);
+  }
+
+  .image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    max-width: 280px;
+    aspect-ratio: 4 / 3;
+    justify-self: center;
+
+    border: 2px dashed var(--header-color);
+    border-radius: 12px;
+    background-color: rgb(255 255 255 / 20%);
+    color: var(--header-color);
+    font-family: inherit;
+    text-align: center;
+  }
+
+  .menu-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .menu-links a {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    padding-block: 4px;
+      font-size: 36px;
+  line-height: 44px;
+  letter-spacing: 0;
+
+    color: var(--header-color);
+    font-family: inherit;
+    font-size: clamp(18px, 1.6vw, 24px);
+    font-weight: 700;
+    line-height: 1.3;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+
+  .menu-links a:hover {
+    text-decoration: underline;
+    text-underline-offset: 6px;
+  }
+
+  .menu-links a:focus-visible {
+    outline: 3px solid var(--header-color);
+    outline-offset: 5px;
+    border-radius: 2px;
+  }
+
+  /* Mobil */
+  @media (max-width: 700px) {
+    .header-bar {
+      height: 85px;
+      padding: 10px 24px;
+    }
+
+.logo,
+.logo-placeholder {
+  width: 64px;
+  height: 64px;
+}
+
+.logo-placeholder {
+  font-size: 14px;
+}
+
+    .menu-inner {
+    grid-template-columns: 1fr;
+  }
+
+    .image-placeholder {
+     display : none;
+    }
+
+    .menu-links {
+      align-items: flex-start;
+      gap: 8px;
+      text-align: left;
+    }
+
+     .menu-links a {
+    margin-inline: 0;
+    font-size: 18px;
+    line-height: 40px;
+    letter-spacing: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .menu-toggle span {
+      transition: none;
+    }
+  }
+</style>
