@@ -1,6 +1,14 @@
 ---
+import kamera from "../images/kamera_img_index.jpg";
+
+
+
+
+
+
 import KnapPrimary from "../components/Knap_primary.astro";
 import KnapSecondary from "../components/Knap_secondary.astro";
+import UdstyrCardIndex from "../components/Udstyr_card_index.astro";
 
 
 const apiurl = "https://uyxpjeeivebwemzealvq.supabase.co/rest/v1/";
@@ -81,4 +89,20 @@ console.log("staffData", staffData);
 	<br>
 <br>
 
-<uUdstyrCardIndex> </uUdstyrCardIndex>
+<UdstyrCardIndex>
+  <img class="card-billede" src={kamera.src} alt="kamera"/>
+
+
+   <div slot="tekst">
+    <h2>Kamera</h2>
+  <p>
+	Har du brug for en masse udstyr til et større projekt,
+	så har vi helt sikkert en pakke der passer til dig.
+	Gå på opdagelse og find et kit der passer til dit projekt.
+</p>
+  </div>
+
+
+
+
+</UdstyrCardIndex>

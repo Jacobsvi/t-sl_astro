@@ -1,0 +1,72 @@
+:root {
+  /* DISPLAY */
+  --display-size: 48px;
+  --display-line-height: 48px;
+  --display-letter-spacing: -0.24px;
+
+  /* H1 */
+  --h1-size: 40px;
+  --h1-line-height: 44px;
+  --h1-letter-spacing: -0.2px;
+
+  /* H2 */
+  --h2-size: 32px;
+  --h2-line-height: 40px;
+  --h2-letter-spacing: 0px;
+
+  /* H3 */
+  --h3-size: 24px;
+  --h3-line-height: 32px;
+  --h3-letter-spacing: 0px;
+
+  /* BODY LARGE */
+  --body-large-size: 18px;
+  --body-large-line-height: 28px;
+  --body-large-letter-spacing: 0px;
+
+  /* BODY REGULAR */
+  --body-regular-size: 16px;
+  --body-regular-line-height: 24px;
+  --body-regular-letter-spacing: 0px;
+
+  /* BODY SMALL */
+  --body-small-size: 14px;
+  --body-small-line-height: 20px;
+  --body-small-letter-spacing: 0px;
+
+  /* LABEL */
+  --label-size: 14px;
+  --label-line-height: 20px;
+  --label-letter-spacing: 0px;
+
+  /* BUTTON */
+  /* Brug det præcise font-family-navn fra Adobe */
+  --button-font-family: "Oso Serif", serif;
+  --button-font-style: italic;
+  --button-size: 16px;
+  --button-line-height: 20px;
+  --button-letter-spacing: 0px;
+}
+
+/* DESKTOP */
+@media (min-width: 768px) {
+  :root {
+    /* DISPLAY */
+    --display-size: 64px;
+    --display-line-height: 64px;
+    --display-letter-spacing: -0.64px;
+
+    /* H1 */
+    --h1-size: 48px;
+    --h1-line-height: 52px;
+    --h1-letter-spacing: -0.24px;
+
+    /* H2 */
+    --h2-size: 36px;
+    --h2-line-height: 44px;
+
+    /* H3 */
+    --h3-size: 28px;
+    --h3-line-height: 36px;
+  }
+}
