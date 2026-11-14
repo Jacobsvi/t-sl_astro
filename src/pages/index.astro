@@ -1,0 +1,84 @@
+---
+import KnapPrimary from "../components/Knap_primary.astro";
+import KnapSecondary from "../components/Knap_secondary.astro";
+
+
+const apiurl = "https://uyxpjeeivebwemzealvq.supabase.co/rest/v1/";
+const equipmentTableName = "equipment";
+const staffTableName = "staff";
+const eventsTableName = "events";
+const studiocardsTableName = "studiocards";
+
+
+const key = "sb_publishable_2crJgmsXwxJPMYeBofiiEQ_Yrl1mHLo"
+
+const options = {
+	headers: {
+		apikey: key
+	},
+}
+
+
+
+const studiocardsResponse = await fetch(apiurl + studiocardsTableName, options); 
+const studiocardsData =  await studiocardsResponse.json();
+
+console.log("studiocardsData", studiocardsData);
+
+const eventsResponse = await fetch(apiurl + eventsTableName, options); 
+const eventsData =  await eventsResponse.json();
+
+console.log("eventsData", eventsData);
+
+
+
+const equipmentResponse = await fetch(apiurl + equipmentTableName, options); 
+const equipmentData =  await equipmentResponse.json();
+
+console.log("equipmentData", equipmentData);
+
+
+
+const staffResponse = await fetch(apiurl + staffTableName, options); 
+const staffData =  await staffResponse.json();
+
+console.log("staffData", staffData);
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+	</head>
+	<body>
+		<h1>Astro</h1>
+	</body>
+
+
+
+	<KnapPrimary>Udstyr</KnapPrimary>
+	<KnapPrimary>Book Studio</KnapPrimary>
+	<KnapPrimary>Events / Workshops</KnapPrimary>
+	<KnapPrimary>Vejledning</KnapPrimary>
+
+
+<br>
+<br>
+
+
+
+	<br>
+<br>
+
+<KnapSecondary>Læs Mere</KnapSecondary>
+</html>
+
+
+	<br>
+<br>
+
+<uUdstyrCardIndex> </uUdstyrCardIndex>
