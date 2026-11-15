@@ -1,6 +1,8 @@
 ---
 import kamera from "../images/kamera_img_index.jpg";
-
+import Lys from "../images/Lys_img_index.png";
+import Lyd from "../images/Lyd_img_index.png";
+import kit from "../images/Kit_img_index.png";
 
 
 
@@ -98,8 +100,17 @@ console.log("staffData", staffData);
 	<br>
 <br>
 
+
+<section class="udstyr-sektion">
+  <div class="baggrundstekst" aria-hidden="true">
+    <h2 class="udstyr-titel">Book Udstyr</h2>
+  </div>
+
+
+
+<div class="book_udstyr_flex">
 <UdstyrCardIndex>
-  <img class="card-billede" src={kamera.src} alt="kamera"/>
+  <img slot="billede" src={kamera.src} alt="kamera"/>
 
 
    <div slot="tekst">
@@ -110,8 +121,107 @@ console.log("staffData", staffData);
 	Gå på opdagelse og find et kit der passer til dit projekt.
 </p>
   </div>
-
-
-
-
 </UdstyrCardIndex>
+
+
+
+
+<UdstyrCardIndex>
+  <img slot="billede" src={Lys.src} alt="Lys"/>
+
+
+  <div slot="tekst">
+  <h2>Lys</h2>
+  <p>
+	Har du brug for en masse udstyr til et større projekt,
+	så har vi helt sikkert en pakke der passer til dig.
+	Gå på opdagelse og find et kit der passer til dit projekt.
+ </p>
+  </div>
+</UdstyrCardIndex>
+
+
+
+
+<UdstyrCardIndex>
+  <img slot="billede" src={Lyd.src} alt="Lyd"/>
+
+
+  <div slot="tekst">
+  <h2>Lyd</h2>
+  <p>
+	Har du brug for en masse udstyr til et større projekt,
+	så har vi helt sikkert en pakke der passer til dig.
+	Gå på opdagelse og find et kit der passer til dit projekt.
+ </p>
+  </div>
+</UdstyrCardIndex>
+
+
+
+
+<UdstyrCardIndex>
+  <img slot="billede" src={kit.src} alt="Kit"/>
+
+
+  <div slot="tekst">
+  <h2>KIT</h2>
+  <p>
+	Har du brug for en masse udstyr til et større projekt,
+	så har vi helt sikkert en pakke der passer til dig.
+	Gå på opdagelse og find et kit der passer til dit projekt.
+ </p>
+  </div>
+</UdstyrCardIndex>
+
+</div>
+</section>
+
+
+
+
+
+<style>
+
+
+
+	.book_udstyr_flex {
+		display: flex;
+		gap: 30px;
+		justify-content: center;
+	}
+
+
+
+
+
+  .udstyr-sektion {
+  position: relative;
+  isolation: isolate;
+  padding-top: 100px;
+}
+
+.baggrundstekst {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: -1;
+
+  text-align: center;
+  font-family: var(--font-overskrift);
+  font-style: italic;
+  font-size: clamp(48px, 12vw, 200px);
+  line-height: 1;
+  color: var(--color-soft-pink);
+
+  pointer-events: none;
+
+  background-color: var(--color-deep-plum);
+}
+
+.cards {
+  position: relative;
+  z-index: 1;
+}
+</style>
