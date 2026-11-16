@@ -1,8 +1,10 @@
-
 ---
-const { logoSrc = "" } = Astro.props;
 
-// Erstat "#" med de rigtige adresser, når I har dem.
+import logo from "../images/TogSL_logo.png";
+
+const { logoSrc = logo.src } = Astro.props;
+
+
 const ekLinks = [
   { text: "SU", href: "/" },
   { text: "Praktik", href: "/" },
@@ -46,29 +48,21 @@ const labLinks = [
 
     <nav class="footer-group" aria-labelledby="footer-ek-title">
       <h2 id="footer-ek-title" class="footer-heading">EK</h2>
-
       <ul class="footer-links">
         {
           ekLinks.map((link) => (
-            <li>
-              <a href={link.href}>{link.text}</a>
-            </li>
+            <li><a href={link.href}>{link.text}</a></li>
           ))
         }
       </ul>
     </nav>
 
     <nav class="footer-group" aria-labelledby="footer-lab-title">
-      <h2 id="footer-lab-title" class="footer-heading">
-        Tech and Story Lab
-      </h2>
-
+      <h2 id="footer-lab-title" class="footer-heading">Tech and Story Lab</h2>
       <ul class="footer-links">
         {
           labLinks.map((link) => (
-            <li>
-              <a href={link.href}>{link.text}</a>
-            </li>
+            <li><a href={link.href}>{link.text}</a></li>
           ))
         }
       </ul>
@@ -80,7 +74,6 @@ const labLinks = [
   .site-footer {
     --footer-background: #6d003e;
     --footer-accent: #ff8d9d;
-
     width: 100%;
     background-color: var(--footer-background);
     color: white;
@@ -94,13 +87,9 @@ const labLinks = [
 
   .footer-inner {
     display: grid;
-    grid-template-columns:
-      minmax(0, 1fr)
-      minmax(0, 1.5fr)
-      minmax(0, 1.5fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr) minmax(0, 1.5fr);
     align-items: start;
     gap: clamp(32px, 6.6vw, 100px);
-
     width: 100%;
     max-width: 1512px;
     margin-inline: auto;
@@ -127,12 +116,10 @@ const labLinks = [
   .footer-logo-placeholder {
     display: grid;
     place-content: center;
-
     width: 100%;
     aspect-ratio: 1;
     border-radius: 50%;
     background-color: rgb(255 141 157 / 12%);
-
     font-family: "Oso Serif", Georgia, serif;
     font-size: clamp(24px, 2.7vw, 40px);
     font-style: italic;
@@ -149,10 +136,8 @@ const labLinks = [
     margin: 0 0 12px;
     padding: 8px 16px;
     border-radius: 12px;
-
     background-color: var(--footer-accent);
     color: var(--footer-background);
-
     font-family: "Oso Serif", Georgia, serif;
     font-size: 18px;
     font-style: italic;
@@ -165,7 +150,6 @@ const labLinks = [
     display: flex;
     flex-direction: column;
     gap: 12px;
-
     margin: 0;
     padding: 0 10px;
     list-style: none;
@@ -174,7 +158,6 @@ const labLinks = [
   .footer-links a {
     display: inline-block;
     padding-block: 4px;
-
     color: white;
     font-size: 14px;
     font-weight: 600;
