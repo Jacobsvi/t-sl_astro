@@ -109,12 +109,12 @@ const { logoSrc = "" } = Astro.props;
 
 <style>
   .site-header {
-    --header-color: #6d003e;
+    --header-color: var( --color-deep-plum);
     --menu-color: #ffc5cd;
     --icon-color: #ff8d9d;
 
     width: 100%;
-    background-color: var(--header-color);
+    background-color: var( --color-deep-plum);
   }
 
   .site-header,
