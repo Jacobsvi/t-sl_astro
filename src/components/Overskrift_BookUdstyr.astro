@@ -1,0 +1,70 @@
+---
+const { hoejre = false } = Astro.props;
+---
+
+
+
+<div class:list={["overskrift_felt", { hoejre }]}>
+  <h2 class="overskrift">
+    <slot />
+  </h2>
+</div>
+
+
+<style>
+  .overskrift_felt {
+    width: 85%;
+    box-sizing: border-box;
+
+    background-color: var(--color-deep-plum);
+    opacity: 80%;
+    border-top-right-radius: 24px;
+
+    padding: 20px 3px 54px;
+
+    z-index: -1;
+  }
+
+  .overskrift {
+    margin: 0;
+    color: var(--color-pure-white);
+
+    font-family: Georgia, serif;
+    font-weight: 400;
+    font-style: italic;
+
+    font-size: 35px;
+    line-height: 1.1;
+    text-align: center;
+  }
+
+
+
+  /* Variant til overskrift placeret i højre side */
+.overskrift_felt.hoejre {
+  margin-left: auto;
+
+  border-top-right-radius: 0;
+  border-top-left-radius: 24px;
+
+  position: relative;
+   z-index: -1;
+}
+
+
+  @media (min-width: 1024px) {
+    .overskrift_felt {
+          width: 40%;
+    padding: 20px 10px 90px;
+    }
+
+    .overskrift {
+      font-size: 54px;
+    }
+
+    .overskrift_felt.hoejre {
+          position: relative;
+   z-index: -1;
+    }
+  }
+</style>

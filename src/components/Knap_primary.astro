@@ -1,5 +1,5 @@
 ---
-import Style from "../styles/global_styles.css"
+import "../styles/global_styles.css";
 ---
 
 
@@ -24,6 +24,8 @@ import Style from "../styles/global_styles.css"
 
 <style>
 
+
+
 .yderste_frame {
 display: inline-block;
 background-color: var(--color-deep-plum);
@@ -39,7 +41,6 @@ box-shadow: 0 3px 0 #aaaaaa;
 .inderste_frame {
 display: inline-block;
 background-color: var(--color-soft-pink);
-
 padding: 2px;
 
 border-radius: 9px;
@@ -48,25 +49,56 @@ border-top-right-radius: 3px;
 
 
 
+
 .knap{
 background-color: var(--color-deep-plum);
-color: var(--color-pure-white);
+color: var(  --color-pure-white);
 border: 0px;
 
 border-radius:7px;
 
-width: clamp(104px, 17vw, 151px);
-height: clamp(23px, 4vw, 29px);
+/* Standard / desktop */
+width: 175px;
+min-height: 44px;
+box-sizing: border-box;
+padding: 8px 12px;
 
-padding: clamp(2px, 0.8vw, 4px) clamp(1px, 1.5vw, 2px);
-font-family: Georgia, serif;
-font-size: clamp(0rem, 0.5rem + 0.5vw, 1.25rem);
-font-style: italic;
+
+
+
+  font-family: var(--button-font-family);
+  font-style: var(--button-font-style);
+  font-size: var(--button-size);
+  line-height: var(--button-line-height);
+  letter-spacing: var(--button-letter-spacing);
+
 }
+
 
 
 .yderste_frame:hover {
 transform: scale(1.05);
 }
 
+
+
+
+@media (max-width: 1023px) {
+  .knap {
+    width: 120px;
+    padding: 3px 10px;
+
+    font-size: 10px;
+    line-height: 20px;
+
+        min-height: 15px;
+  }
+}
 </style>
+
+
+
+
+
+
+

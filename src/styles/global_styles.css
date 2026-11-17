@@ -1,5 +1,6 @@
+/* FÆLLES VARIABLER */
 :root {
-  /* PRIMARY */
+  /* Primære farver */
   --color-business-blue: #0038a8;
   --color-business-blue-light: #0c53ed;
   --color-campus-green: #acb504;
@@ -11,72 +12,38 @@
   --color-pencil-grey: #333333;
   --color-pure-white: #ffffff;
 
-  /* SECONDARY */
+  /* Sekundære farver */
   --color-soft-pink: #ff8d9d;
   --color-deep-plum: #6d003e;
   --color-orange: #ffb34a;
 
-  /************************/
-  /************************/
-  /************************/
-  /************************/
-  /************************/
-  /************************/
-  /************************/
-  /************************/
+  /* Skrifttyper */
+  --font-overskrift_h2: "oso-sans", sans-serif;
+  --font-broedtekst: "oso-sans", sans-serif;
 
-  /* DISPLAY */
+  /* Standardstørrelser til brødtekst */
+  --body-regular-size: 16px;
+  --body-regular-line-height: 24px;
+}
 
-  /* H2 */
-  h2 {
-    font-family: var(--font-overskrift_h2);
-    font-weight: 300;
-    font-style: italic;
+/* STANDARDSTYLING TIL OVERSKRIFTER */
+h2 {
+  font-family: var(--font-overskrift_h2);
+  font-weight: 300;
+  font-style: italic;
 
-    font-size: 40px;
-    line-height: 44px;
-    margin-top: 0;
-  }
+  font-size: 40px;
+  line-height: 44px;
+  margin-top: 0;
+}
 
-  p {
-    font-family: var(--font-broedtekst);
-    font-size: var(--body-regular-size);
-    line-height: var(--body-regular-line-height);
+/* STANDARDSTYLING TIL BRØDTEKST */
+p {
+  font-family: var(--font-broedtekst);
+  font-weight: 400;
+  font-style: normal;
 
-    font-weight: 400;
-    font-style: normal;
-    letter-spacing: 0;
-  }
-
-  :root {
-    --font-overskrift_h2: "oso-sans", sans-serif;
-
-    --font-broedtekst: "oso-sans", sans-serif;
-
-    --body-regular-size: 16px;
-    --body-regular-line-height: 24px;
-  }
-
-  /* DESKTOP */
-  @media (min-width: 768px) {
-    :root {
-      /* DISPLAY */
-      --display-size: 64px;
-      --display-line-height: 64px;
-      --display-letter-spacing: -0.64px;
-
-      /* H1 */
-      --h1-size: 48px;
-      --h1-line-height: 52px;
-      --h1-letter-spacing: -0.24px;
-
-      /* H2 */
-      --h2-size: 36px;
-      --h2-line-height: 44px;
-
-      /* H3 */
-      --h3-size: 28px;
-      --h3-line-height: 36px;
-    }
-  }
+  font-size: var(--body-regular-size);
+  line-height: var(--body-regular-line-height);
+  letter-spacing: 0;
 }

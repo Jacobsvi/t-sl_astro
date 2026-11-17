@@ -24,6 +24,8 @@ import "../styles/global_styles.css";
 
 <style>
 
+
+
 .yderste_frame {
 display: inline-block;
 background-color: #FFB34A;
@@ -55,13 +57,12 @@ border: 0px;
 
 border-radius:7px;
 
-width: clamp(104px, 17vw, 151px);
-height: clamp(23px, 4vw, 29px);
+/* Standard / desktop */
+width: 120px;
+min-height: 44px;
+box-sizing: border-box;
+padding: 8px 12px;
 
-padding: clamp(2px, 0.8vw, 4px) clamp(1px, 1.5vw, 2px);
-/* font-family: Georgia, serif;
-font-size: clamp(0rem, 0.5rem + 0.5vw, 1.25rem);
-font-style: italic; */
 
 
 
@@ -79,5 +80,19 @@ font-style: italic; */
 transform: scale(1.05);
 }
 
+
+
+
+@media (max-width: 1023px) {
+  .knap {
+    width: 74px;
+    padding: 3px 10px;
+
+    font-size: 10px;
+    line-height: 20px;
+
+        min-height: 15px;
+  }
+}
 </style>
 

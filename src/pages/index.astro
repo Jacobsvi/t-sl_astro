@@ -3,6 +3,9 @@ import kamera from "../images/kamera_img_index.jpg";
 import Lys from "../images/Lys_img_index.png";
 import Lyd from "../images/Lyd_img_index.png";
 import kit from "../images/Kit_img_index.png";
+import Podcast from "../images/Podcast.png";
+import Photo from "../images/Photo.png";
+import Eyetracking from "../images/Eyetracking.png";
 
 
 
@@ -11,8 +14,13 @@ import kit from "../images/Kit_img_index.png";
 import KnapPrimary from "../components/Knap_primary.astro";
 import KnapSecondary from "../components/Knap_secondary.astro";
 import UdstyrCardIndex from "../components/Udstyr_card_index.astro";
+import StudioCardIndex from "../components/Studio_card_index.astro";
+
 
 import Layout from "../layouts/layout.astro";
+import OverskriftBookUdstyr from "../components/Overskrift_BookUdstyr.astro";
+import Forside from "../components/Forside.astro";
+
 
 
 const apiurl = "https://uyxpjeeivebwemzealvq.supabase.co/rest/v1/";
@@ -77,12 +85,8 @@ console.log("staffData", staffData);
 	</body>
 
 
+<Forside></Forside>
 
-
-	<KnapPrimary>Udstyr</KnapPrimary>
-	<KnapPrimary>Book Studio</KnapPrimary>
-	<KnapPrimary>Events / Workshops</KnapPrimary>
-	<KnapPrimary>Vejledning</KnapPrimary>
 
 
 <br>
@@ -102,9 +106,7 @@ console.log("staffData", staffData);
 
 
 <section class="udstyr-sektion">
-  <div class="baggrundstekst" aria-hidden="true">
-    <h2 class="udstyr-titel">Book Udstyr</h2>
-  </div>
+ <OverskriftBookUdstyr> Book Udstyr</OverskriftBookUdstyr>
 
 
 
@@ -178,50 +180,130 @@ console.log("staffData", staffData);
 </section>
 
 
+	<br>
+<br>
+
+
+
+
+
+
+
+
+<section class="studio-sektion">
+<OverskriftBookUdstyr hoejre>
+  Book Studio
+</OverskriftBookUdstyr>
+
+
+
+
+<div class="book_studio_flex">
+<StudioCardIndex>
+<img slot="billede" src={Podcast.src} alt="Podcast"/>
+
+
+  <div slot="tekst">
+  <h2>Podcast</h2>
+  <p>
+	Har du brug for en masse udstyr til et større projekt,
+	så har vi helt sikkert en pakke der passer til dig.
+	Gå på opdagelse og find et kit der passer til dit projekt.
+ </p>
+  </div>
+</StudioCardIndex>
+
+<br>
+
+<StudioCardIndex>
+<img slot="billede" src={Photo.src} alt="Photo"/>
+
+
+  <div slot="tekst">
+  <h2>Photo</h2>
+  <p>
+	Har du brug for en masse udstyr til et større projekt,
+	så har vi helt sikkert en pakke der passer til dig.
+	Gå på opdagelse og find et kit der passer til dit projekt.
+ </p>
+  </div>
+
+</StudioCardIndex>
+
+<br>
+
+<StudioCardIndex>
+<img slot="billede" src={Eyetracking.src} alt="Eyetracking"/>
+
+
+  <div slot="tekst">
+  <h2>Eye Tracking</h2>
+  <p>
+	Har du brug for en masse udstyr til et større projekt,
+	så har vi helt sikkert en pakke der passer til dig.
+	Gå på opdagelse og find et kit der passer til dit projekt.
+ </p>
+  </div>
+
+</StudioCardIndex>
+</div>
+</section>
+
+
 
 
 
 <style>
+  /* Hold hver sektions lag samlet */
+  .udstyr-sektion,
+  .studio-sektion {
+    position: relative;
+    isolation: isolate;
+  }
 
+  /* Begge grupper af cards */
+  .book_udstyr_flex,
+  .book_studio_flex {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
 
+    /* Placér hele card-gruppen foran overskriften */
+    position: relative;
+    z-index: 1;
 
-	.book_udstyr_flex {
-		display: flex;
-		gap: 30px;
-		justify-content: center;
-	}
+    margin-top: -40px;
+    padding-inline: 28px;
+  }
 
+  /* Desktop */
+  @media (min-width: 1024px) {
+    .book_udstyr_flex,
+    .book_studio_flex {
+      margin-top: -70px;
+    }
+  }
 
+ /* Mobil */
+@media (max-width: 1023px) {
+  /* Fælles mobilindstillinger */
+  .book_udstyr_flex,
+  .book_studio_flex {
+    display: grid;
+    gap: 12px;
+    padding-inline: 12px;
+  }
 
+  /* Udstyr: to cards pr. række */
+  .book_udstyr_flex {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 
-
-  .udstyr-sektion {
-  position: relative;
-  isolation: isolate;
-  padding-top: 100px;
-}
-
-.baggrundstekst {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: -1;
-
-  text-align: center;
-  font-family: var(--font-overskrift);
-  font-style: italic;
-  font-size: clamp(48px, 12vw, 200px);
-  line-height: 1;
-  color: var(--color-soft-pink);
-
-  pointer-events: none;
-
-  background-color: var(--color-deep-plum);
-}
-
-.cards {
-  position: relative;
-  z-index: 1;
+  /* Studio: ét card pr. række */
+  .book_studio_flex {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    gap: 24px;
+  }
 }
 </style>
