@@ -1,3 +1,204 @@
 ---
 
+import logo from "../images/TogSL_logo.png";
+
+const { logoSrc = logo.src } = Astro.props;
+
+
+const ekLinks = [
+  { text: "SU", href: "/" },
+  { text: "Praktik", href: "/" },
+  { text: "Studieadministration", href: "/" },
+];
+
+const labLinks = [
+  { text: "Instagram", href: "/udstyr" },
+  { text: "Kontaktinformation", href: "/" },
+  { text: "Vejledning", href: "/help" },
+  { text: "Jobs", href: "/" },
+  { text: "Politik om brug", href: "/" },
+];
 ---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <a
+      class="footer-logo-link"
+      href="/"
+      aria-label="Tech & Story Lab – forside"
+    >
+      {
+        logoSrc ? (
+          <img
+            class="footer-logo"
+            src={logoSrc}
+            alt="Tech & Story Lab"
+            width="256"
+            height="256"
+          />
+        ) : (
+          <span class="footer-logo-placeholder" aria-hidden="true">
+            Tech &amp;
+            <br />
+            Story Lab
+          </span>
+        )
+      }
+    </a>
+
+    <nav class="footer-group" aria-labelledby="footer-ek-title">
+      <h2 id="footer-ek-title" class="footer-heading">EK</h2>
+      <ul class="footer-links">
+        {
+          ekLinks.map((link) => (
+            <li><a href={link.href}>{link.text}</a></li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <nav class="footer-group" aria-labelledby="footer-lab-title">
+      <h2 id="footer-lab-title" class="footer-heading">Tech and Story Lab</h2>
+      <ul class="footer-links">
+        {
+          labLinks.map((link) => (
+            <li><a href={link.href}>{link.text}</a></li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    --footer-background: #6d003e;
+    --footer-accent: #ff8d9d;
+    width: 100%;
+    background-color: var(--footer-background);
+    color: white;
+    font-family: inherit;
+  }
+
+  .site-footer,
+  .site-footer * {
+    box-sizing: border-box;
+  }
+
+  .footer-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr) minmax(0, 1.5fr);
+    align-items: start;
+    gap: clamp(32px, 6.6vw, 100px);
+    width: 100%;
+    max-width: 1512px;
+    margin-inline: auto;
+    padding: 28px clamp(24px, 8.5vw, 128px);
+  }
+
+  .footer-logo-link {
+    display: block;
+    width: 100%;
+    max-width: 256px;
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+  }
+
+  .footer-logo {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: contain;
+  }
+
+  .footer-logo-placeholder {
+    display: grid;
+    place-content: center;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: rgb(255 141 157 / 12%);
+    font-family: "Oso Serif", Georgia, serif;
+    font-size: clamp(24px, 2.7vw, 40px);
+    font-style: italic;
+    line-height: 1.1;
+    text-align: center;
+  }
+
+  .footer-group {
+    min-width: 0;
+    padding-top: 14px;
+  }
+
+  .footer-heading {
+    margin: 0 0 12px;
+    padding: 8px 16px;
+    border-radius: 12px;
+    background-color: var(--footer-accent);
+    color: var(--footer-background);
+    font-family: "Oso Serif", Georgia, serif;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: center;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0;
+    padding: 0 10px;
+    list-style: none;
+  }
+
+  .footer-links a {
+    display: inline-block;
+    padding-block: 4px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 24px;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+
+  .footer-links a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .footer-links a:focus-visible,
+  .footer-logo-link:focus-visible {
+    outline: 3px solid white;
+    outline-offset: 5px;
+  }
+
+  @media (max-width: 700px) {
+    .footer-inner {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      padding: 32px 24px;
+    }
+
+    .footer-logo-link {
+      max-width: 150px;
+      justify-self: center;
+    }
+
+    .footer-logo-placeholder {
+      font-size: 26px;
+    }
+
+    .footer-group {
+      padding-top: 0;
+    }
+
+    .footer-links a {
+      font-size: 16px;
+    }
+  }
+</style>

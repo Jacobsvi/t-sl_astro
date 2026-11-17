@@ -1,16 +1,29 @@
 ---
-import Header from '../components/Header.astro';
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 ---
 
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
 
-<head>
+    <link
+      rel="stylesheet"
+      href="https://use.typekit.net/vzi2ptz.css"
+    />
 
+    <title>Tech & Story Lab</title>
+  </head>
 
-  <link
-rel="stylesheet" href="https://use.typekit.net/vzi2ptz.css"
-/>
-</head>
+  <body>
+    <Header />
 
-<header>
-  <Header />
-</header>
+    <main>
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
+</html>

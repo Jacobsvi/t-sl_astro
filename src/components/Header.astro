@@ -1,5 +1,9 @@
 ---
-const { logoSrc = "" } = Astro.props;
+import logo from "../images/TogSL_logo.png";
+import image from "../images/illustrations.png";
+
+const { logoSrc = logo.src } = Astro.props;
+const { imageSrc = image.src } = Astro.props;
 ---
 
 <header class="site-header" data-site-header>
@@ -45,7 +49,10 @@ const { logoSrc = "" } = Astro.props;
   >
     <div class="menu-inner">
       <div class="image-placeholder" aria-hidden="true">
-        Billede kommer her
+        <img
+  src={imageSrc}
+  alt="Illustration af en person, der arbejder med filmudstyr"
+/>
       </div>
 
       <ul class="menu-links">
@@ -109,12 +116,12 @@ const { logoSrc = "" } = Astro.props;
 
 <style>
   .site-header {
-    --header-color: #6d003e;
+    --header-color: var( --color-deep-plum);
     --menu-color: #ffc5cd;
     --icon-color: #ff8d9d;
 
     width: 100%;
-    background-color: var(--header-color);
+    background-color: var( --color-deep-plum);
   }
 
   .site-header,
@@ -248,23 +255,24 @@ const { logoSrc = "" } = Astro.props;
     padding: 16px clamp(24px, 6.35vw, 96px);
   }
 
-  .image-placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+ .image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    width: 100%;
-    max-width: 280px;
-    aspect-ratio: 4 / 3;
-    justify-self: center;
+  width: 100%;
+  max-width: 420px;
+  justify-self: center;
 
-    border: 2px dashed var(--header-color);
-    border-radius: 12px;
-    background-color: rgb(255 255 255 / 20%);
-    color: var(--header-color);
-    font-family: inherit;
-    text-align: center;
-  }
+}
+
+.image-placeholder img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 240px;
+  object-fit: contain;
+}
 
   .menu-links {
     display: flex;
