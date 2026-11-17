@@ -2,7 +2,7 @@
 import kamera from "../images/kamera_img_index.jpg";
 import Lys from "../images/Lys_img_index.png";
 import Lyd from "../images/Lyd_img_index.png";
-import kit from "../images/Kit_img_index.png";
+import kit from "../images/KIT_img_index.png";
 import Podcast from "../images/Podcast.png";
 import Photo from "../images/Photo.png";
 import Eyetracking from "../images/Eyetracking.png";
@@ -41,7 +41,7 @@ const studiocardsResponse = await fetch(
 
 const studiocardsData = await studiocardsResponse.json();
 
-console.log("studiocardsData", studiocardsData);
+//console.log("studiocardsData", studiocardsData);
 
 /* HENT EVENTS */
 const eventsResponse = await fetch(
@@ -51,7 +51,7 @@ const eventsResponse = await fetch(
 
 const eventsData = await eventsResponse.json();
 
-console.log("eventsData", eventsData);
+//console.log("eventsData", eventsData);
 
 /* HENT UDSTYR */
 const equipmentResponse = await fetch(
@@ -61,7 +61,7 @@ const equipmentResponse = await fetch(
 
 const equipmentData = await equipmentResponse.json();
 
-console.log("equipmentData", equipmentData);
+//console.log("equipmentData", equipmentData);
 
 /* HENT MEDARBEJDERE */
 const staffResponse = await fetch(
@@ -71,7 +71,7 @@ const staffResponse = await fetch(
 
 const staffData = await staffResponse.json();
 
-console.log("staffData", staffData);
+//console.log("staffData", staffData);
 ---
 
 <Layout>
