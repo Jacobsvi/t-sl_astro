@@ -7,276 +7,257 @@ import Podcast from "../images/Podcast.png";
 import Photo from "../images/Photo.png";
 import Eyetracking from "../images/Eyetracking.png";
 
-
-
-
-
-import KnapPrimary from "../components/Knap_primary.astro";
 import KnapSecondary from "../components/Knap_secondary.astro";
 import UdstyrCardIndex from "../components/Udstyr_card_index.astro";
 import StudioCardIndex from "../components/Studio_card_index.astro";
-
-
-import Layout from "../layouts/layout.astro";
 import OverskriftBookUdstyr from "../components/Overskrift_BookUdstyr.astro";
 import Forside from "../components/Forside.astro";
 
+import Layout from "../layouts/layout.astro";
 
+/* API-INDSTILLINGER */
+const apiurl =
+  "https://uyxpjeeivebwemzealvq.supabase.co/rest/v1/";
 
-const apiurl = "https://uyxpjeeivebwemzealvq.supabase.co/rest/v1/";
 const equipmentTableName = "equipment";
 const staffTableName = "staff";
 const eventsTableName = "events";
 const studiocardsTableName = "studiocards";
 
-
-const key = "sb_publishable_2crJgmsXwxJPMYeBofiiEQ_Yrl1mHLo"
+const key =
+  "sb_publishable_2crJgmsXwxJPMYeBofiiEQ_Yrl1mHLo";
 
 const options = {
-	headers: {
-		apikey: key
-	},
-}
+  headers: {
+    apikey: key,
+  },
+};
 
+/* HENT STUDIOCARDS */
+const studiocardsResponse = await fetch(
+  apiurl + studiocardsTableName,
+  options
+);
 
-
-const studiocardsResponse = await fetch(apiurl + studiocardsTableName, options); 
-const studiocardsData =  await studiocardsResponse.json();
+const studiocardsData = await studiocardsResponse.json();
 
 console.log("studiocardsData", studiocardsData);
 
-const eventsResponse = await fetch(apiurl + eventsTableName, options); 
-const eventsData =  await eventsResponse.json();
+/* HENT EVENTS */
+const eventsResponse = await fetch(
+  apiurl + eventsTableName,
+  options
+);
+
+const eventsData = await eventsResponse.json();
 
 console.log("eventsData", eventsData);
 
+/* HENT UDSTYR */
+const equipmentResponse = await fetch(
+  apiurl + equipmentTableName,
+  options
+);
 
-
-const equipmentResponse = await fetch(apiurl + equipmentTableName, options); 
-const equipmentData =  await equipmentResponse.json();
+const equipmentData = await equipmentResponse.json();
 
 console.log("equipmentData", equipmentData);
 
+/* HENT MEDARBEJDERE */
+const staffResponse = await fetch(
+  apiurl + staffTableName,
+  options
+);
 
-
-const staffResponse = await fetch(apiurl + staffTableName, options); 
-const staffData =  await staffResponse.json();
+const staffData = await staffResponse.json();
 
 console.log("staffData", staffData);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-
-
 <Layout>
-  <h1>Tech & Story Lab</h1>
-  <p>Her kommer forsidens indhold.</p>
+  <!-- FORSIDENS INTRO -->
+  <Forside />
+
+  <h2>Deployment</h2>
+
+  <!-- BOOK UDSTYR -->
+  <section class="udstyr-sektion">
+    <OverskriftBookUdstyr>
+      Book Udstyr
+    </OverskriftBookUdstyr>
+
+    <div class="book_udstyr_flex">
+      <!-- KAMERA -->
+      <UdstyrCardIndex>
+        <img
+          slot="billede"
+          src={kamera.src}
+          alt="Kamera"
+        />
+
+        <div slot="tekst">
+          <h2>Kamera</h2>
+
+          <p>
+            Har du brug for en masse udstyr til et større projekt,
+            så har vi helt sikkert en pakke der passer til dig.
+            Gå på opdagelse og find et kit der passer til dit projekt.
+          </p>
+        </div>
+      </UdstyrCardIndex>
+
+      <!-- LYS -->
+      <UdstyrCardIndex>
+        <img
+          slot="billede"
+          src={Lys.src}
+          alt="Lys"
+        />
+
+        <div slot="tekst">
+          <h2>Lys</h2>
+
+          <p>
+            Har du brug for en masse udstyr til et større projekt,
+            så har vi helt sikkert en pakke der passer til dig.
+            Gå på opdagelse og find et kit der passer til dit projekt.
+          </p>
+        </div>
+      </UdstyrCardIndex>
+
+      <!-- LYD -->
+      <UdstyrCardIndex>
+        <img
+          slot="billede"
+          src={Lyd.src}
+          alt="Lyd"
+        />
+
+        <div slot="tekst">
+          <h2>Lyd</h2>
+
+          <p>
+            Har du brug for en masse udstyr til et større projekt,
+            så har vi helt sikkert en pakke der passer til dig.
+            Gå på opdagelse og find et kit der passer til dit projekt.
+          </p>
+        </div>
+      </UdstyrCardIndex>
+
+      <!-- KIT -->
+      <UdstyrCardIndex>
+        <img
+          slot="billede"
+          src={kit.src}
+          alt="Kit med udstyr"
+        />
+
+        <div slot="tekst">
+          <h2>KIT</h2>
+
+          <p>
+            Har du brug for en masse udstyr til et større projekt,
+            så har vi helt sikkert en pakke der passer til dig.
+            Gå på opdagelse og find et kit der passer til dit projekt.
+          </p>
+        </div>
+      </UdstyrCardIndex>
+    </div>
+  </section>
+
+  <!-- BOOK STUDIO -->
+  <section class="studio-sektion">
+    <OverskriftBookUdstyr hoejre>
+      Book Studio
+    </OverskriftBookUdstyr>
+
+    <div class="book_studio_flex">
+      <!-- PODCAST -->
+      <StudioCardIndex>
+        <img
+          slot="billede"
+          src={Podcast.src}
+          alt="Podcast"
+        />
+
+        <div slot="tekst">
+          <h2>Podcast</h2>
+
+          <p>
+            Har du brug for en masse udstyr til et større projekt,
+            så har vi helt sikkert en pakke der passer til dig.
+            Gå på opdagelse og find et kit der passer til dit projekt.
+          </p>
+        </div>
+      </StudioCardIndex>
+
+      <!-- PHOTO -->
+      <StudioCardIndex>
+        <img
+          slot="billede"
+          src={Photo.src}
+          alt="Fotostudie"
+        />
+
+        <div slot="tekst">
+          <h2>Photo</h2>
+
+          <p>
+            Har du brug for en masse udstyr til et større projekt,
+            så har vi helt sikkert en pakke der passer til dig.
+            Gå på opdagelse og find et kit der passer til dit projekt.
+          </p>
+        </div>
+      </StudioCardIndex>
+
+      <!-- EYE TRACKING -->
+      <StudioCardIndex>
+        <img
+          slot="billede"
+          src={Eyetracking.src}
+          alt="Eye Tracking"
+        />
+
+        <div slot="tekst">
+          <h2>Eye Tracking</h2>
+
+          <p>
+            Har du brug for en masse udstyr til et større projekt,
+            så har vi helt sikkert en pakke der passer til dig.
+            Gå på opdagelse og find et kit der passer til dit projekt.
+          </p>
+        </div>
+      </StudioCardIndex>
+    </div>
+  </section>
 </Layout>
 
-	</body>
-
-
-<Forside></Forside>
-
-
-
-<br>
-<br>
-
-
-
-	<br>
-<br>
-
-<KnapSecondary>Læs Mere</KnapSecondary>
-</html>
-
-
-	<br>
-<br>
-
-
-<section class="udstyr-sektion">
- <OverskriftBookUdstyr> Book Udstyr</OverskriftBookUdstyr>
-
-
-
-<div class="book_udstyr_flex">
-<UdstyrCardIndex>
-  <img slot="billede" src={kamera.src} alt="kamera"/>
-
-
-   <div slot="tekst">
-    <h2>Kamera</h2>
-  <p>
-	Har du brug for en masse udstyr til et større projekt,
-	så har vi helt sikkert en pakke der passer til dig.
-	Gå på opdagelse og find et kit der passer til dit projekt.
-</p>
-  </div>
-</UdstyrCardIndex>
-
-
-
-
-<UdstyrCardIndex>
-  <img slot="billede" src={Lys.src} alt="Lys"/>
-
-
-  <div slot="tekst">
-  <h2>Lys</h2>
-  <p>
-	Har du brug for en masse udstyr til et større projekt,
-	så har vi helt sikkert en pakke der passer til dig.
-	Gå på opdagelse og find et kit der passer til dit projekt.
- </p>
-  </div>
-</UdstyrCardIndex>
-
-
-
-
-<UdstyrCardIndex>
-  <img slot="billede" src={Lyd.src} alt="Lyd"/>
-
-
-  <div slot="tekst">
-  <h2>Lyd</h2>
-  <p>
-	Har du brug for en masse udstyr til et større projekt,
-	så har vi helt sikkert en pakke der passer til dig.
-	Gå på opdagelse og find et kit der passer til dit projekt.
- </p>
-  </div>
-</UdstyrCardIndex>
-
-
-
-
-<UdstyrCardIndex>
-  <img slot="billede" src={kit.src} alt="Kit"/>
-
-
-  <div slot="tekst">
-  <h2>KIT</h2>
-  <p>
-	Har du brug for en masse udstyr til et større projekt,
-	så har vi helt sikkert en pakke der passer til dig.
-	Gå på opdagelse og find et kit der passer til dit projekt.
- </p>
-  </div>
-</UdstyrCardIndex>
-
-</div>
-</section>
-
-
-	<br>
-<br>
-
-
-
-
-
-
-
-
-<section class="studio-sektion">
-<OverskriftBookUdstyr hoejre>
-  Book Studio
-</OverskriftBookUdstyr>
-
-
-
-
-<div class="book_studio_flex">
-<StudioCardIndex>
-<img slot="billede" src={Podcast.src} alt="Podcast"/>
-
-
-  <div slot="tekst">
-  <h2>Podcast</h2>
-  <p>
-	Har du brug for en masse udstyr til et større projekt,
-	så har vi helt sikkert en pakke der passer til dig.
-	Gå på opdagelse og find et kit der passer til dit projekt.
- </p>
-  </div>
-</StudioCardIndex>
-
-<br>
-
-<StudioCardIndex>
-<img slot="billede" src={Photo.src} alt="Photo"/>
-
-
-  <div slot="tekst">
-  <h2>Photo</h2>
-  <p>
-	Har du brug for en masse udstyr til et større projekt,
-	så har vi helt sikkert en pakke der passer til dig.
-	Gå på opdagelse og find et kit der passer til dit projekt.
- </p>
-  </div>
-
-</StudioCardIndex>
-
-<br>
-
-<StudioCardIndex>
-<img slot="billede" src={Eyetracking.src} alt="Eyetracking"/>
-
-
-  <div slot="tekst">
-  <h2>Eye Tracking</h2>
-  <p>
-	Har du brug for en masse udstyr til et større projekt,
-	så har vi helt sikkert en pakke der passer til dig.
-	Gå på opdagelse og find et kit der passer til dit projekt.
- </p>
-  </div>
-
-</StudioCardIndex>
-</div>
-</section>
-
-
-
-
-
 <style>
-  /* Hold hver sektions lag samlet */
+  /* SEKTIONERNES PLACERING OG AFSTAND */
   .udstyr-sektion,
   .studio-sektion {
     position: relative;
     isolation: isolate;
+    margin-top: 64px;
   }
 
-  /* Begge grupper af cards */
+  /* FÆLLES LAYOUT FOR BEGGE GRUPPER AF CARDS */
   .book_udstyr_flex,
   .book_studio_flex {
     display: flex;
     gap: 30px;
     justify-content: center;
 
-    /* Placér hele card-gruppen foran overskriften */
+    /* Cards foran overskriftsbaggrunden */
     position: relative;
     z-index: 1;
 
+    /* Overlap med overskriftsbaggrunden */
     margin-top: -40px;
     padding-inline: 28px;
   }
 
-  /* Desktop */
+  /* DESKTOP */
   @media (min-width: 1024px) {
     .book_udstyr_flex,
     .book_studio_flex {
@@ -284,26 +265,25 @@ console.log("staffData", staffData);
     }
   }
 
- /* Mobil */
-@media (max-width: 1023px) {
-  /* Fælles mobilindstillinger */
-  .book_udstyr_flex,
-  .book_studio_flex {
-    display: grid;
-    gap: 12px;
-    padding-inline: 12px;
-  }
+  /* MOBIL */
+  @media (max-width: 1023px) {
+    .book_udstyr_flex,
+    .book_studio_flex {
+      display: grid;
+      gap: 12px;
+      padding-inline: 12px;
+    }
 
-  /* Udstyr: to cards pr. række */
-  .book_udstyr_flex {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+    /* Udstyr: to cards pr. række */
+    .book_udstyr_flex {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 
-  /* Studio: ét card pr. række */
-  .book_studio_flex {
-    grid-template-columns: minmax(0, 1fr);
-    justify-items: center;
-    gap: 24px;
+    /* Studio: ét card pr. række */
+    .book_studio_flex {
+      grid-template-columns: minmax(0, 1fr);
+      justify-items: center;
+      gap: 24px;
+    }
   }
-}
 </style>
