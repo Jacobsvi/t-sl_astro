@@ -24,6 +24,8 @@ import "../styles/global_styles.css";
 
 <style>
 
+
+
 .yderste_frame {
 display: inline-block;
 background-color: #FFB34A;
@@ -56,11 +58,20 @@ border: 0px;
 border-radius:7px;
 
 width: clamp(104px, 17vw, 151px);
-min-height: 29px;
-height: auto;
+height: clamp(23px, 4vw, 29px);
 
 padding: clamp(2px, 0.8vw, 4px) clamp(1px, 1.5vw, 2px);
-font: var(--knap-oso-serif);
+/* font-family: Georgia, serif;
+font-size: clamp(0rem, 0.5rem + 0.5vw, 1.25rem);
+font-style: italic; */
+
+
+
+  font-family: var(--button-font-family);
+  font-style: var(--button-font-style);
+  font-size: var(--button-size);
+  line-height: var(--button-line-height);
+  letter-spacing: var(--button-letter-spacing);
 
 }
 
@@ -70,5 +81,19 @@ font: var(--knap-oso-serif);
 transform: scale(1.05);
 }
 
+
+
+
+@media (max-width: 1023px) {
+  .knap {
+    width: 74px;
+    padding: 3px 10px;
+
+    font-size: 10px;
+    line-height: 20px;
+
+        min-height: 15px;
+  }
+}
 </style>
 
