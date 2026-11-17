@@ -1,6 +1,7 @@
 ---
 import logo from "../images/TogSL_logo.png";
 import image from "../images/illustrations.png";
+import "../styles/global_styles.css";
 
 const { logoSrc = logo.src } = Astro.props;
 const { imageSrc = image.src } = Astro.props;
@@ -140,6 +141,7 @@ const { imageSrc = image.src } = Astro.props;
     height: 170px;
     margin-inline: auto;
     padding: 10px clamp(24px, 6.35vw, 96px);
+  background-color: var(--color-deep-plum);
   }
 
   .logo-link {

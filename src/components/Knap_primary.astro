@@ -1,5 +1,7 @@
 ---
 import "../styles/global_styles.css";
+
+const { href } = Astro.props;
 ---
 
 
@@ -12,7 +14,9 @@ import "../styles/global_styles.css";
 <div class="yderste_frame">
     <div class="inderste_frame">
         <button class="knap">
-            <slot/>
+          <a href={href} class="knap-primary">
+   <slot/>
+          </a>
         </button>
     </div>
 </div>
