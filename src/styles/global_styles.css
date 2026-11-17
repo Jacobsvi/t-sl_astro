@@ -1,6 +1,5 @@
-/* FÆLLES VARIABLER */
 :root {
-  /* Primære farver */
+  /* PRIMARY */
   --color-business-blue: #0038a8;
   --color-business-blue-light: #0c53ed;
   --color-campus-green: #acb504;
@@ -12,38 +11,67 @@
   --color-pencil-grey: #333333;
   --color-pure-white: #ffffff;
 
-  /* Sekundære farver */
+  /* SECONDARY */
   --color-soft-pink: #ff8d9d;
   --color-deep-plum: #6d003e;
   --color-orange: #ffb34a;
 
-  /* Skrifttyper */
-  --font-overskrift_h2: "oso-sans", sans-serif;
-  --font-broedtekst: "oso-sans", sans-serif;
+  /* TYPOGRAFI - mobil. Størrelser fra projektets webskala i Figma.
+     Rækkefølge: kursiv (valgfri), vægt, størrelse, skrifttype.*/
+  --font-oso-sans: "oso-sans", sans-serif;
+  --font-oso-serif: "oso-serif", serif;
 
-  /* Standardstørrelser til brødtekst */
-  --body-regular-size: 16px;
-  --body-regular-line-height: 24px;
+  --display-oso-serif: italic 300 48px var(--font-oso-serif);
+  --display-oso-sans: 400 48px var(--font-oso-sans);
+  --h1-oso-serif: italic 300 40px var(--font-oso-serif);
+  --h1-oso-sans: 400 40px var(--font-oso-sans);
+  --h2-oso-sans: 600 32px var(--font-oso-sans);
+  --h3-oso-sans: 600 24px var(--font-oso-sans);
+  --broedtekst-stor-oso-sans: 300 18px var(--font-oso-sans);
+  --broedtekst-oso-sans: 300 16px var(--font-oso-sans);
+  --broedtekst-lille-oso-sans: 300 14px var(--font-oso-sans);
+  --label-oso-sans: 600 14px var(--font-oso-sans);
+  --knap-oso-serif: italic 400 16px var(--font-oso-serif);
+  --knap-oso-sans: 600 16px var(--font-oso-sans);
 }
 
-/* STANDARDSTYLING TIL OVERSKRIFTER */
-h2 {
-  font-family: var(--font-overskrift_h2);
-  font-weight: 300;
-  font-style: italic;
+/* Desktop */
+@media (min-width: 768px) {
+  :root {
+    --display-oso-serif: italic 300 64px var(--font-oso-serif);
+    --display-oso-sans: 400 64px var(--font-oso-sans);
+    --h1-oso-serif: italic 300 48px var(--font-oso-serif);
+    --h1-oso-sans: 400 48px var(--font-oso-sans);
+    --h2-oso-sans: 600 36px var(--font-oso-sans);
+    --h3-oso-sans: 600 28px var(--font-oso-sans);
+  }
+}
 
-  font-size: 40px;
-  line-height: 44px;
+body {
+  font: var(--broedtekst-oso-sans);
+}
+
+h1 {
+  font: var(--h1-oso-serif);
+}
+
+h2 {
+  font: var(--h2-oso-sans);
+}
+
+h3 {
+  font: var(--h3-oso-sans);
+}
+
+h1,
+h2,
+h3 {
   margin-top: 0;
 }
 
-/* STANDARDSTYLING TIL BRØDTEKST */
-p {
-  font-family: var(--font-broedtekst);
-  font-weight: 400;
-  font-style: normal;
-
-  font-size: var(--body-regular-size);
-  line-height: var(--body-regular-line-height);
-  letter-spacing: 0;
+button,
+input,
+select,
+textarea {
+  font: inherit;
 }
