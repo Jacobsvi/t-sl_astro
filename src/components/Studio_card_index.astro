@@ -1,32 +1,28 @@
 ---
 import KnapSecondary from "./Knap_secondary.astro";
+
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
 ---
 
-
-
 <article class="card">
-  
   <div class="card_billede">
-<slot name="billede" />
+    <slot name="billede" />
   </div>
-
-
 
   <div class="card_tekst">
-<slot name="tekst" />
+    <slot name="tekst" />
   </div>
-
-
 
   <div class="card_knap">
-<KnapSecondary>Book Studio</KnapSecondary>
+    <KnapSecondary href={href}>
+      Book Studio
+    </KnapSecondary>
   </div>
-
 </article>
-
-
-
-
 
 <style>
   /* CARD — FÆLLES DESIGN */
@@ -35,7 +31,7 @@ import KnapSecondary from "./Knap_secondary.astro";
     flex-direction: column;
 
     width: 100%;
-    max-width: 300px;
+    max-width: none;
     min-width: 0;
     box-sizing: border-box;
 
@@ -71,13 +67,11 @@ import KnapSecondary from "./Knap_secondary.astro";
   .card_tekst :global(h2) {
     margin: 0 0 3px;
     font-size: 22px;
-    line-height: 36px;
   }
 
   .card_tekst :global(p) {
     margin: 0;
     font-size: 10px;
-    line-height: 14px;
   }
 
   /* KNAP */
@@ -96,12 +90,10 @@ import KnapSecondary from "./Knap_secondary.astro";
 
     .card_tekst :global(h2) {
       font-size: 40px;
-      line-height: 44px;
     }
 
     .card_tekst :global(p) {
       font-size: 18px;
-      line-height: 28px;
     }
 
     .card_knap {
@@ -109,7 +101,3 @@ import KnapSecondary from "./Knap_secondary.astro";
     }
   }
 </style>
-
-
-
-

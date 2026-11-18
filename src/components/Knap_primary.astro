@@ -1,104 +1,99 @@
 ---
 import "../styles/global_styles.css";
+
+interface Props {
+  href?: string;
+  compact?: boolean;
+  as?: "a" | "button";
+  "data-filter"?: string;
+  "aria-pressed"?: "true" | "false";
+  "aria-controls"?: string;
+}
+
+const {
+  href = "/",
+  compact = false,
+  as: Tag = "a",
+  ...attributes
+} = Astro.props;
 ---
 
-
-
-
-
-
-
-
-<div class="yderste_frame">
-    <div class="inderste_frame">
-        <button class="knap">
-            <slot/>
-        </button>
-    </div>
-</div>
-
-
-
-
-
+<Tag
+  href={Tag === "a" ? href : undefined}
+  type={Tag === "button" ? "button" : undefined}
+  class:list={["knap-primary", { "knap-compact": compact }]}
+  {...attributes}
+>
+  <slot />
+</Tag>
 
 <style>
+  .knap-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 64px;
+    padding: 8px 12px;
 
+    font: var(--knap-oso-serif);
+    color: var(--color-pure-white);
+    text-decoration: none;
+    text-align: center;
+    overflow-wrap: anywhere;
 
-.yderste_frame {
-display: inline-block;
-background-color: var(--color-deep-plum);
-padding: 3px;
-margin: 0%;
-border-radius: 11px;
-border-top-right-radius: 5px;
-box-shadow: 0 3px 0 #aaaaaa;
-}
+    background-color: var(--color-deep-plum);
+    border: 3px solid var(--color-deep-plum);
+    border-radius: 11px;
+    border-top-right-radius: 5px;
 
+    box-shadow:
+      inset 0 0 0 2px var(--color-soft-pink),
+      0 3px 0 #aaaaaa;
 
+    cursor: pointer;
 
-.inderste_frame {
-display: inline-block;
-background-color: var(--color-soft-pink);
-padding: 2px;
-
-border-radius: 9px;
-border-top-right-radius: 3px;
-}
-
-
-
-
-.knap{
-background-color: var(--color-deep-plum);
-color: var(  --color-pure-white);
-border: 0px;
-
-border-radius:7px;
-
-/* Standard / desktop */
-width: 229px;
-min-height: 44px;
-box-sizing: border-box;
-padding: 8px 12px;
-
-
-
-
-  font-family: var(--button-font-family);
-  font-style: var(--button-font-style);
-  font-size: var(--button-size);
-  line-height: var(--button-line-height);
-  letter-spacing: var(--button-letter-spacing);
-
-}
-
-
-
-.yderste_frame:hover {
-transform: scale(1.05);
-}
-
-
-
-
-@media (max-width: 1023px) {
-  .knap {
-    width: 120px;
-    padding: 3px 10px;
-
-    font-size: 10px;
-    line-height: 20px;
-
-        min-height: 15px;
+    transition:
+      box-shadow 180ms ease,
+      transform 180ms ease;
   }
-}
+
+  .knap-primary.knap-compact {
+    width: 170px;
+    max-width: 100%;
+    height: 44px;
+    min-height: 44px;
+    padding: 6px 12px;
+  }
+
+  .knap-primary:visited {
+    color: var(--color-pure-white);
+  }
+
+  .knap-primary:hover {
+    box-shadow:
+      inset 0 0 0 2px var(--color-soft-pink),
+      0 5px 0 #aaaaaa;
+
+    transform: translateY(-2px);
+  }
+
+  .knap-primary:focus-visible {
+    outline: 3px solid var(--color-soft-pink);
+    outline-offset: 3px;
+  }
+
+  /* Det valgte filter */
+  .knap-primary[aria-pressed="true"] {
+    background-color: var(--color-soft-pink);
+    color: var(--color-deep-plum);
+
+    box-shadow:
+      inset 0 0 0 2px var(--color-deep-plum),
+      0 3px 0 #aaaaaa;
+  }
 </style>
-
-
-
-
-
-
-

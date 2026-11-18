@@ -1,0 +1,145 @@
+/* ---------- Mobil (standard) ---------- */
+.foto-side {
+  --foto-blomme: #5e0f3f;
+  --foto-pink: #ee8f98;
+  --foto-lys-pink: #f4b6bb;
+  --foto-creme: #fdf5e2;
+  --foto-overskrift: "Lora", Georgia, serif;
+  --foto-tekst: "Cabin", Arial, sans-serif;
+
+  color: var(--foto-blomme);
+  line-height: 1.5;
+}
+.foto-side *,
+.foto-side *::before,
+.foto-side *::after {
+  box-sizing: border-box;
+}
+.foto-side img {
+  display: block;
+  max-width: 100%;
+}
+.foto-side p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Sektioner */
+.foto-side .sektion {
+  padding: 1.5rem 1rem;
+}
+.foto-side .sektion > * {
+  max-width: 62rem;
+  margin-inline: auto;
+}
+
+.foto-side .sektion--hvid {
+  background: linear-gradient(115deg, var(--foto-creme) 0 30%, transparent 30%), #fff;
+}
+.foto-side .sektion--pink {
+  background: linear-gradient(160deg, var(--foto-lys-pink) 0 35%, var(--foto-pink) 35%);
+}
+
+/* Titel-bjælke */
+.foto-side .titel {
+  margin: 0 0 1rem;
+  padding: 0.4rem 1rem;
+  background: var(--foto-blomme);
+  color: #fff;
+  font-family: var(--foto-overskrift);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.15rem;
+  text-align: center;
+  border-radius: 6px;
+}
+.foto-side .titel--bred {
+  margin-bottom: 1.5rem;
+}
+
+/* Billeder */
+.foto-side .foto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 3px solid var(--foto-blomme);
+  border-radius: 14px;
+  background: var(--foto-lys-pink);
+}
+.foto-side .ikon {
+  width: 100%;
+  max-width: 15rem;
+  margin-inline: auto;
+}
+
+/* Grids: én kolonne */
+.foto-side .grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.foto-side .grid--kaffe {
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "tekst"
+    "a"
+    "b"
+    "c";
+}
+.foto-side .foto--kaffe-1 {
+  grid-area: a;
+  aspect-ratio: 4 / 3;
+}
+.foto-side .tekst-blok--hoejre {
+  grid-area: tekst;
+}
+.foto-side .foto--kaffe-2 {
+  grid-area: b;
+  aspect-ratio: 4 / 3;
+}
+.foto-side .foto--kaffe-3 {
+  grid-area: c;
+  aspect-ratio: 4 / 3;
+}
+
+.foto-side .grid--to-kol {
+  grid-template-columns: 1fr;
+}
+.foto-side .grid--to-kol > .foto {
+  aspect-ratio: 16 / 10;
+}
+
+/* ---------- Tablet og desktop ---------- */
+@media (min-width: 700px) {
+  .foto-side .sektion {
+    padding: 2.5rem 2rem;
+  }
+
+  .foto-side .titel {
+    font-size: 1.35rem;
+  }
+
+  .foto-side .grid {
+    gap: 1.5rem;
+  }
+
+  .foto-side .grid--kaffe {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "a tekst"
+      "b c";
+    align-items: start;
+  }
+  .foto-side .foto--kaffe-3 {
+    margin-top: -4rem;
+  }
+
+  .foto-side .grid--to-kol {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+
+  .foto-side .ikon {
+    max-width: 20rem;
+  }
+}

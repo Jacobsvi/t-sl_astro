@@ -1,0 +1,323 @@
+---
+import Layout from "../layouts/layout.astro";
+import UdstyrCardUdstyr from "../components/Udstyr_card_udstyr.astro";
+import KnapPrimary from "../components/Knap_primary.astro";
+
+/* TYPER */
+type Equipment = {
+  type: string | null;
+  brand: string | null;
+  description: string | null;
+  img: string | null;
+};
+
+/* FILTERKATEGORIER */
+const categories = [
+  "Alle",
+  "Kamera",
+  "Lys",
+  "Lyd",
+  "Video",
+  "KIT",
+  "Andet",
+];
+
+/*
+  FORDEL UDSTYRSTYPER I KATEGORIER
+
+  Tilføj de præcise type-værdier fra API'et her.
+  Skriv dem med små bogstaver.
+
+  Typer, der ikke findes på listen,
+  placeres automatisk under "Andet".
+*/
+const categoryByType: Record<string, string> = {
+  kamera: "Kamera",
+  lys: "Lys",
+  lyd: "Lyd",
+  video: "Video",
+  kit: "KIT",
+
+  "video micro": "Lyd",
+  "single led light (with temperature adjustment)": "Lys",
+};
+
+function getCategory(type: string | null): string {
+  const normalizedType = (type ?? "").trim().toLowerCase();
+
+  return categoryByType[normalizedType] ?? "Andet";
+}
+
+/* API-INDSTILLINGER */
+const apiurl =
+  "https://uyxpjeeivebwemzealvq.supabase.co/rest/v1/";
+
+const key =
+  "sb_publishable_2crJgmsXwxJPMYeBofiiEQ_Yrl1mHLo";
+
+/* HENT UDSTYR */
+const equipmentResponse = await fetch(
+  apiurl + "equipment?select=*",
+  {
+    headers: {
+      apikey: key,
+    },
+  }
+);
+
+/* KONTROLLÉR API-SVARET */
+if (!equipmentResponse.ok) {
+  const errorText = await equipmentResponse.text();
+
+  console.error(
+    "Supabase-fejl:",
+    equipmentResponse.status,
+    errorText
+  );
+
+  throw new Error(
+    `Kunne ikke hente udstyr: ${equipmentResponse.status}`
+  );
+}
+
+/* GEM DATA */
+const equipmentData: Equipment[] =
+  await equipmentResponse.json();
+---
+
+<Layout>
+  <section
+    class="udstyr-side"
+    data-equipment-page
+    aria-label="Udstyr"
+  >
+    <div class="udstyr-layout">
+      <!-- FILTERKNAPPER MED DIN KOMPONENT -->
+      <nav class="filtre" aria-label="Filtrer udstyr">
+        {
+          categories.map((category) => (
+            <KnapPrimary
+              as="button"
+              data-filter={category}
+              aria-pressed={category === "Alle" ? "true" : "false"}
+              aria-controls="udstyr-resultater"
+            >
+              {category}
+            </KnapPrimary>
+          ))
+        }
+      </nav>
+
+      <!-- UDSTYRSCARDS -->
+      <div class="resultater" id="udstyr-resultater">
+        <div class="cards">
+          {
+            equipmentData.map((equipment) => (
+              <div
+                class="card-wrapper"
+                data-equipment-card
+                data-category={getCategory(equipment.type)}
+              >
+                <UdstyrCardUdstyr
+                  type={equipment.type}
+                  brand={equipment.brand}
+                  description={equipment.description}
+                  image={equipment.img}
+                />
+              </div>
+            ))
+          }
+        </div>
+
+        <!-- BESKED, HVIS KATEGORIEN ER TOM -->
+        <p
+          class="tom-besked"
+          data-empty-message
+          hidden={equipmentData.length > 0}
+          role="status"
+        >
+          Der er ikke noget udstyr at vise i denne kategori.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  function setupEquipmentFilters() {
+    const page = document.querySelector<HTMLElement>(
+      "[data-equipment-page]"
+    );
+
+    if (!page || page.dataset.filtersReady === "true") {
+      return;
+    }
+
+    page.dataset.filtersReady = "true";
+
+    const buttons = page.querySelectorAll<HTMLButtonElement>(
+      "button[data-filter]"
+    );
+
+    const cards = page.querySelectorAll<HTMLElement>(
+      "[data-equipment-card]"
+    );
+
+    const emptyMessage = page.querySelector<HTMLElement>(
+      "[data-empty-message]"
+    );
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const selectedCategory = button.dataset.filter;
+
+        let hasVisibleCards = false;
+
+        /* MARKÉR DEN VALGTE KNAP */
+        buttons.forEach((otherButton) => {
+          otherButton.setAttribute(
+            "aria-pressed",
+            otherButton === button ? "true" : "false"
+          );
+        });
+
+        /* VIS KUN CARDS I DEN VALGTE KATEGORI */
+        cards.forEach((card) => {
+          const matches =
+            selectedCategory === "Alle" ||
+            card.dataset.category === selectedCategory;
+
+          card.hidden = !matches;
+
+          if (matches) {
+            hasVisibleCards = true;
+          }
+        });
+
+        /* VIS BESKED, HVIS INGEN CARDS MATCHER */
+        if (emptyMessage) {
+          emptyMessage.hidden = hasVisibleCards;
+        }
+      });
+    });
+  }
+
+  setupEquipmentFilters();
+
+  /* UNDERSTØT OGSÅ ASTROS KLIENTNAVIGATION */
+  document.addEventListener(
+    "astro:page-load",
+    setupEquipmentFilters
+  );
+</script>
+
+<style>
+  /* SIDENS BREDDE OG AFSTANDE */
+  .udstyr-side {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1440px;
+    min-width: 0;
+
+    margin-inline: auto;
+    padding: 24px 16px;
+  }
+
+  /* MOBIL: FILTERKNAPPER OVER CARDS */
+  .udstyr-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    gap: 24px;
+
+    min-width: 0;
+  }
+
+  /*
+    PLACERING AF DINE KNAPKOMPONENTER
+    Selve knapdesignet ligger i Knap_primary.astro.
+  */
+  .filtre {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 12px;
+
+    min-width: 0;
+  }
+
+  .resultater {
+    min-width: 0;
+  }
+
+  /* MINDSTE SKÆRME: ÉT CARD */
+  .cards {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: stretch;
+    gap: 20px;
+
+    min-width: 0;
+  }
+
+  .card-wrapper {
+    display: grid;
+    min-width: 0;
+  }
+
+  /* FILTREREDE CARDS SKAL IKKE OPTAGE PLADS */
+  .card-wrapper[hidden] {
+    display: none;
+  }
+
+  .tom-besked {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  /* MOBIL: TO CARDS */
+  @media (min-width: 480px) {
+    .cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+  }
+
+  /* TABLET: FILTERKNAPPER TIL VENSTRE */
+  @media (min-width: 768px) {
+    .udstyr-layout {
+      grid-template-columns: 160px minmax(0, 1fr);
+      gap: 28px;
+    }
+
+    .filtre {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 20px;
+    }
+  }
+
+  /* DESKTOP: TRE CARDS */
+  @media (min-width: 1024px) {
+    .udstyr-side {
+      padding: 40px 24px;
+    }
+
+    .udstyr-layout {
+      grid-template-columns: 190px minmax(0, 1fr);
+      gap: 36px;
+    }
+
+    .cards {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+  }
+
+  /* STOR DESKTOP: FIRE CARDS */
+  @media (min-width: 1280px) {
+    .cards {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+</style>

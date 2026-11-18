@@ -1,0 +1,288 @@
+---
+interface Props {
+  billede?: string | null;
+  navn: string;
+  titel?: string | null;
+  speciale?: string | null;
+  telefon?: string | null;
+  email?: string | null;
+  labEmail?: string | null;
+}
+
+const {
+  billede = "",
+  navn,
+  titel = "",
+  speciale = "",
+  telefon = "",
+  email = "",
+  labEmail = "",
+} = Astro.props;
+
+const telefonLink = (telefon ?? "").replace(/\s/g, "");
+
+const specialeTekst = (speciale ?? "").trim();
+---
+
+<article class="team-card">
+  <!-- LILLA OVERSKRIFTSBJÆLKE -->
+  <header class="team-banner">
+    <h2>
+      <span class="banner-light">Få hjælp til </span>
+      <span class="banner-bold">
+        {specialeTekst || "udstyr og studios"}
+      </span>
+    </h2>
+  </header>
+
+  <!-- BILLEDE OG INFORMATION -->
+  <div class="team-indhold">
+    <!-- BILLEDE -->
+    <div class="team-billede-felt">
+      {
+        billede ? (
+          <img
+            class="team-billede"
+            src={billede}
+            alt={`Portræt af ${navn}`}
+            loading="lazy"
+          />
+        ) : (
+          <div class="team-intet-billede">
+            Intet billede tilgængeligt
+          </div>
+        )
+      }
+    </div>
+
+    <!-- INFORMATION -->
+    <div class="team-info">
+      <h3 class="team-overskrift">
+        <span class="team-navn">{navn}</span>
+      </h3>
+
+      {titel && <p class="team-titel">{titel}</p>}
+
+      <p class="team-beskrivelse">
+        {
+          specialeTekst
+            ? `Skriv til ${navn} ved spørgsmål om ${specialeTekst}.`
+            : `Skriv til ${navn}, hvis du har brug for hjælp.`
+        }
+        <br />
+        Du er også velkommen til at komme ned og tale med os.
+      </p>
+
+      <!-- KONTAKTOPLYSNINGER -->
+      <address class="team-kontakt">
+        {
+          telefon && (
+            <a href={`tel:${telefonLink}`}>
+              Tlf.: {telefon}
+            </a>
+          )
+        }
+
+        {
+          email && (
+            <a href={`mailto:${email}`}>
+              E-mail: {email}
+            </a>
+          )
+        }
+
+        {
+          labEmail && (
+            <a href={`mailto:${labEmail}`}>
+              Lab-e-mail: {labEmail}
+            </a>
+          )
+        }
+      </address>
+    </div>
+  </div>
+</article>
+
+<style>
+  /* HELE KORTET */
+  .team-card {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+
+    color: var(--color-deep-plum);
+  }
+
+  /* OVERSKRIFTSBJÆLKE */
+  .team-banner {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 16px 20px;
+
+    background-color: var(--color-deep-plum);
+    color: var(--color-pure-white);
+    border-radius: 12px;
+
+    text-align: center;
+  }
+
+  .team-banner h2 {
+    margin: 0;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+  }
+
+  .banner-light {
+    font: var(--knap-oso-serif);
+    font-size: 24px;
+  }
+
+  .banner-bold {
+    font-family: var(--font-oso-sans);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  /* MOBIL: BILLEDE OVER TEKST */
+  .team-indhold {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    gap: 24px;
+
+    margin-top: 24px;
+    min-width: 0;
+  }
+
+  /* BILLEDE */
+  .team-billede-felt {
+    box-sizing: border-box;
+    min-width: 0;
+    aspect-ratio: 4 / 3;
+
+    border: 3px solid var(--color-deep-plum);
+    border-radius: 18px;
+    overflow: hidden;
+  }
+
+  .team-billede {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .team-intet-billede {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+
+    background-color: #f3f3f3;
+    font: var(--broedtekst-oso-sans);
+    text-align: center;
+  }
+
+  /* NAVN OG STILLING */
+  .team-info {
+    min-width: 0;
+  }
+
+  .team-overskrift {
+    margin: 0 0 8px;
+    overflow-wrap: anywhere;
+  }
+
+  .team-navn {
+    font-family: var(--font-oso-sans);
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .team-titel {
+    margin: 0 0 24px;
+
+    font: var(--knap-oso-serif);
+    font-size: 22px;
+    line-height: 1.3;
+
+    overflow-wrap: anywhere;
+  }
+
+  /* BESKRIVELSE */
+  .team-beskrivelse {
+    margin: 0 0 24px;
+
+    font: var(--broedtekst-oso-sans);
+    line-height: 1.6;
+
+    overflow-wrap: anywhere;
+  }
+
+  /* TELEFON OG E-MAIL */
+  .team-kontakt {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+
+    font: var(--broedtekst-oso-sans);
+    font-style: normal;
+    line-height: 1.5;
+  }
+
+  .team-kontakt a {
+    max-width: 100%;
+    color: inherit;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+
+  .team-kontakt a:hover {
+    text-decoration: underline;
+  }
+
+  .team-kontakt a:focus-visible {
+    outline: 2px solid var(--color-deep-plum);
+    outline-offset: 4px;
+  }
+
+  /* TABLET / DESKTOP: BILLEDE TIL VENSTRE */
+  @media (min-width: 768px) {
+    .team-banner {
+      padding: 20px 24px;
+    }
+
+    .banner-light,
+    .banner-bold {
+      font-size: 30px;
+    }
+
+    .team-indhold {
+      grid-template-columns:
+        minmax(0, 0.9fr)
+        minmax(0, 1.1fr);
+
+      gap: 36px;
+      margin-top: 28px;
+    }
+
+    .team-info {
+      padding-top: 8px;
+    }
+
+    .team-navn {
+      font-size: 36px;
+    }
+
+    .team-titel {
+      font-size: 26px;
+    }
+  }
+</style>
