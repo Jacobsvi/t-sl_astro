@@ -76,7 +76,17 @@ const staffResponse = await fetch(
   options
 );
 
-const staffData = await staffResponse.json();
+type Medarbejder = {
+  img: string | null;
+  firstname: string;
+  lastname: string;
+  title: string;
+  Speciale?: string | null;
+  phone: string | null;
+  email: string | null;
+};
+
+const staffData: Medarbejder[] = await staffResponse.json();
 
 console.log("staffData", staffData);
 ---
@@ -375,7 +385,7 @@ console.log("staffData", staffData);
           billede={person.img}
           navn={`${person.firstname} ${person.lastname}`}
           titel={person.title}
-          speciale={person.speciale ?? ""}
+          speciale={person.Speciale ?? ""}
           telefon={person.phone}
           email={person.email}
         />
@@ -434,13 +444,16 @@ console.log("staffData", staffData);
   color: white;
 }
 
+
 .projekter-indhold {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   align-items: center;
-  gap: 40px;
+  gap: 32px;
 
-  max-width: 1512px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1200px;
   margin-inline: auto;
   padding: 40px 32px;
 }
@@ -507,9 +520,11 @@ console.log("staffData", staffData);
 }
 
 .workshops-indhold {
-  max-width: 1512px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1200px;
   margin-inline: auto;
-  padding: 48px 40px;
+  padding: 48px 32px;
 }
 
 .workshops-indhold > h2 {
@@ -525,8 +540,7 @@ console.log("staffData", staffData);
 
 .workshops-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  justify-content: space-evenly;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 32px;
 }
 

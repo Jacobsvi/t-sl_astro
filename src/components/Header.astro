@@ -61,7 +61,7 @@ const { imageSrc = image.src } = Astro.props;
         <li><a href="/udstyr">Udstyr</a></li>
         <li><a href="/inspiration">Inspiration</a></li>
         <li><a href="/help">Hjælp og vejledning</a></li>
-        <li><a href="/events">Events &amp; Workshops</a></li>
+       
       </ul>
     </div>
   </nav>
@@ -122,6 +122,9 @@ const { imageSrc = image.src } = Astro.props;
     --icon-color: var(--color-soft-pink);
     width: 100%;
     background-color: var( --color-deep-plum);
+     position: sticky;
+  top: 0;
+  z-index: 1000;
   }
 
   .site-header,
