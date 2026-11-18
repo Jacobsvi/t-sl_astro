@@ -118,8 +118,7 @@ const { imageSrc = image.src } = Astro.props;
   .site-header {
     --header-color: var( --color-deep-plum);
     --menu-color: #ffc5cd;
-    --icon-color: #ff8d9d;
-
+    --icon-color: var(--color-soft-pink);
     width: 100%;
     background-color: var( --color-deep-plum);
   }
@@ -137,7 +136,7 @@ const { imageSrc = image.src } = Astro.props;
 
     width: 100%;
     max-width: 1512px;
-    height: 170px;
+    height: 120px;
     margin-inline: auto;
     padding: 10px clamp(24px, 6.35vw, 96px);
   }
@@ -151,7 +150,7 @@ const { imageSrc = image.src } = Astro.props;
   .logo {
     display: block;
     width: 130px;
-    height: 130px;
+    height: 100px;
     object-fit: contain;
   }
 
@@ -161,9 +160,9 @@ const { imageSrc = image.src } = Astro.props;
     justify-content: center;
 
     width: 130px;
-    height: 130px;
+    height: 100px;
     border-radius: 50%;
-    background-color: rgb(255 141 157 / 15%);
+    background-color: var( --color-deep-plum)/ 15%;
     color: white;
 
     font-family: var(--font-oso-serif);
@@ -188,12 +187,10 @@ const { imageSrc = image.src } = Astro.props;
   .menu-toggle span {
     position: absolute;
     left: 6px;
-
     display: block;
     width: 36px;
     height: 2px;
     background-color: var(--icon-color);
-
     transition: transform 180ms ease, opacity 180ms ease;
   }
 
@@ -249,7 +246,7 @@ const { imageSrc = image.src } = Astro.props;
 
     width: 100%;
     max-width: 1512px;
-    min-height: 280px;
+    min-height: 200px;
     margin-inline: auto;
     padding: 16px clamp(24px, 6.35vw, 96px);
   }
@@ -265,13 +262,14 @@ const { imageSrc = image.src } = Astro.props;
 
 }
 
+/** billeder i burgermenuen */
 .image-placeholder img {
   display: block;
   width: 100%;
   height: auto;
   max-height: 240px;
   object-fit: contain;
-}
+} 
 
   .menu-links {
     display: flex;
@@ -313,7 +311,7 @@ const { imageSrc = image.src } = Astro.props;
   /* Mobil */
   @media (max-width: 700px) {
     .header-bar {
-      height: 85px;
+      height: 70px;
       padding: 10px 24px;
     }
 
