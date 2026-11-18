@@ -54,10 +54,17 @@ margin-bottom: 20px;
     }
 
 
-
+    /* Kun knappernes placering i desktop og mobile */
+ .knapper_forside {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 20px;
+  margin-top: auto;
+}
 
   /* DESKTOP */
-  @media (min-width: 1024px) {
+  @media (min-width: 1000px) {
     /* To kolonner: tekst og billede */
     .forside_1_1 {
       display: grid;
@@ -99,16 +106,6 @@ margin-bottom: 20px;
       font-size: 20px;
     }
 
-    /* Kun knappernes placering */
-    .knapper_forside {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-
-    margin-top: auto;
-    margin-bottom: 0;
-    padding-bottom: 0;
-    }
 
     /* Højre kolonne */
     .højre_side {
@@ -125,5 +122,50 @@ margin-bottom: 20px;
       object-fit: cover;
     }
   }
+
+
+ @media (max-width: 1000px) {
+  .forside_1_1 {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "titel"
+      "billede"
+      "beskrivelse"
+      "knapper";
+    gap: 24px;
+  }
+
+  .venstre_side {
+    display: contents;
+  }
+
+  .venstre_side h1 {
+    grid-area: titel;
+    margin: 0;
+  }
+
+  .højre_side {
+    grid-area: billede;
+    border-radius: 18px;
+    overflow: hidden;
+  }
+
+  .højre_side img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .venstre_side h3 {
+    grid-area: beskrivelse;
+    margin: 0;
+  }
+
+  .knapper_forside {
+    grid-area: knapper;
+    grid-template-columns: 1fr;
+  }
+}
+}
 </style>
 
