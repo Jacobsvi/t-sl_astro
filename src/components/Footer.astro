@@ -5,18 +5,11 @@ import logo from "../images/TogSL_logo.png";
 const { logoSrc = logo.src } = Astro.props;
 
 
-const ekLinks = [
-  { text: "SU", href: "/" },
-  { text: "Praktik", href: "/" },
-  { text: "Studieadministration", href: "/" },
-];
-
 const labLinks = [
-  { text: "Instagram", href: "/udstyr" },
-  { text: "Kontaktinformation", href: "/" },
+  { text: "Instagram", href: "https://www.instagram.com/erhvervsakademikoebenhavn_labs/" },
   { text: "Vejledning", href: "/help" },
-  { text: "Jobs", href: "/" },
-  { text: "Politik om brug", href: "/" },
+  { text: "Booking", href: "/udstyr" },
+  { text: "Events & workshops", href: "/events" },
 ];
 ---
 
@@ -47,13 +40,45 @@ const labLinks = [
     </a>
 
     <nav class="footer-group" aria-labelledby="footer-ek-title">
-      <h2 id="footer-ek-title" class="footer-heading">EK</h2>
+      <h2 id="footer-ek-title" class="footer-heading">Information</h2>
       <ul class="footer-links">
-        {
-          ekLinks.map((link) => (
-            <li><a href={link.href}>{link.text}</a></li>
-          ))
-        }
+      <li>
+  <h3 class="footer-info-title">Adresse:</h3>
+  <p class="footer-info-text">
+    EK Guldbergsgade, Bygning A, A025
+    <br />
+    (lokalet bag receptionen)
+  </p>
+</li>
+
+<li>
+  <h3 class="footer-info-title">Åbningstider:</h3>
+  <p class="footer-info-text">
+    Mandag til torsdag kl. 09:00–16:00
+    <br />
+    Fredag kl. 09:00–15:00
+  </p>
+</li>
+
+<li>
+  <h3 class="footer-info-title">Adgang til labbet og vilkår for brug:</h3>
+  <p class="footer-info-text footer-terms">
+    Tech &amp; Story Lab er åbent for alle studerende, undervisere
+    og øvrige ansatte på EK. Studier og faciliteter i EK's labs
+    må udelukkende anvendes til prototypeudvikling, øvelse og
+    eksperimenter og ikke til kommerciel produktion eller anden
+    erhvervsmæssig drift.
+  </p>
+</li>
+
+<li>
+  <h3 class="footer-info-title">Kontakt:</h3>
+  <p class="footer-info-text">
+    Telefon: 46 46 04 42
+    <br />
+    E-mail: techandstorylab@ek.dk
+  </p>
+</li>
       </ul>
     </nav>
 
@@ -72,11 +97,11 @@ const labLinks = [
 
 <style>
   .site-footer {
-    --footer-background: #6d003e;
-    --footer-accent: #ff8d9d;
+    --footer-background: var(--color-deep-plum);
+    --footer-accent: var(--color-soft-pink);
     width: 100%;
     background-color: var(--footer-background);
-    color: white;
+    color: var(--color-pure-white);
     font-family: inherit;
   }
 
@@ -101,7 +126,7 @@ const labLinks = [
     width: 100%;
     max-width: 256px;
     border-radius: 50%;
-    color: white;
+    color: -- var(--color-pure-white);
     text-decoration: none;
   }
 
@@ -112,7 +137,7 @@ const labLinks = [
     aspect-ratio: 1;
     object-fit: contain;
   }
-
+/** 
   .footer-logo-placeholder {
     display: grid;
     place-content: center;
@@ -120,12 +145,11 @@ const labLinks = [
     aspect-ratio: 1;
     border-radius: 50%;
     background-color: rgb(255 141 157 / 12%);
-    font-family: "Oso Serif", Georgia, serif;
+    font-family: var(--font-oso-serif);
     font-size: clamp(24px, 2.7vw, 40px);
     font-style: italic;
-    line-height: 1.1;
     text-align: center;
-  }
+  } ****/
 
   .footer-group {
     min-width: 0;
@@ -138,11 +162,10 @@ const labLinks = [
     border-radius: 12px;
     background-color: var(--footer-accent);
     color: var(--footer-background);
-    font-family: "Oso Serif", Georgia, serif;
+    font-family: var(--font-oso-serif);
     font-size: 18px;
     font-style: italic;
     font-weight: 400;
-    line-height: 24px;
     text-align: center;
   }
 
@@ -158,12 +181,12 @@ const labLinks = [
   .footer-links a {
     display: inline-block;
     padding-block: 4px;
-    color: white;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 24px;
+    color: var(--color-pure-white);
+    font-size: 12px;
+    font-weight: 400;
     text-decoration: none;
     overflow-wrap: anywhere;
+    font-family: var(--font-oso-sans);
   }
 
   .footer-links a:hover {
@@ -176,6 +199,26 @@ const labLinks = [
     outline: 3px solid white;
     outline-offset: 5px;
   }
+
+  .footer-info-title {
+  margin: 0;
+  font-family: var(--font-oso-sans);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.footer-info-text {
+  margin: 4px 0 0;
+  font-family: var(--font-oso-sans);
+  font-size: 12px;
+  font-weight: 400;
+  overflow-wrap: anywhere;
+}
+
+.footer-terms {
+  font-size: 8px;
+  font-style: italic;
+}
 
   @media (max-width: 700px) {
     .footer-inner {
@@ -190,7 +233,7 @@ const labLinks = [
     }
 
     .footer-logo-placeholder {
-      font-size: 26px;
+      font-size: 20px;
     }
 
     .footer-group {
@@ -198,7 +241,7 @@ const labLinks = [
     }
 
     .footer-links a {
-      font-size: 16px;
+      font-size: 10px;
     }
   }
 </style>

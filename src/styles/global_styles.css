@@ -16,67 +16,62 @@
   --color-deep-plum: #6d003e;
   --color-orange: #ffb34a;
 
-  /************************/
-  /************************/
-  /************************/
-  /************************/
-  /************************/
-  /************************/
-  /************************/
-  /************************/
+  /* TYPOGRAFI - mobil. Størrelser fra projektets webskala i Figma.
+     Rækkefølge: kursiv (valgfri), vægt, størrelse, skrifttype.*/
+  --font-oso-sans: "oso-sans", sans-serif;
+  --font-oso-serif: "oso-serif", serif;
 
-  /* DISPLAY */
+  --display-oso-serif: italic 300 48px var(--font-oso-serif);
+  --display-oso-sans: 400 48px var(--font-oso-sans);
+  --h1-oso-serif: italic 300 40px var(--font-oso-serif);
+  --h1-oso-sans: 400 40px var(--font-oso-sans);
+  --h2-oso-sans: 600 32px var(--font-oso-sans);
+  --h3-oso-sans: 600 24px var(--font-oso-sans);
+  --broedtekst-stor-oso-sans: 300 18px var(--font-oso-sans);
+  --broedtekst-oso-sans: 300 16px var(--font-oso-sans);
+  --broedtekst-lille-oso-sans: 300 14px var(--font-oso-sans);
+  --label-oso-sans: 600 14px var(--font-oso-sans);
+  --knap-oso-serif: italic 400 16px var(--font-oso-serif);
+  --knap-oso-sans: 600 16px var(--font-oso-sans);
+}
 
-  /* H2 */
-  h2 {
-    font-family: var(--font-overskrift_h2);
-    font-weight: 300;
-    font-style: italic;
-
-    font-size: 40px;
-    line-height: 44px;
-    margin-top: 0;
-  }
-
-  p {
-    font-family: var(--font-broedtekst);
-    font-size: var(--body-regular-size);
-    line-height: var(--body-regular-line-height);
-
-    font-weight: 400;
-    font-style: normal;
-    letter-spacing: 0;
-  }
-
+/* Desktop */
+@media (min-width: 768px) {
   :root {
-    --font-overskrift_h2: "oso-sans", sans-serif;
-
-    --font-broedtekst: "oso-sans", sans-serif;
-
-    --body-regular-size: 16px;
-    --body-regular-line-height: 24px;
+    --display-oso-serif: italic 300 64px var(--font-oso-serif);
+    --display-oso-sans: 400 64px var(--font-oso-sans);
+    --h1-oso-serif: italic 300 48px var(--font-oso-serif);
+    --h1-oso-sans: 400 48px var(--font-oso-sans);
+    --h2-oso-sans: 600 36px var(--font-oso-sans);
+    --h3-oso-sans: 600 28px var(--font-oso-sans);
   }
+}
 
-  /* DESKTOP */
-  @media (min-width: 768px) {
-    :root {
-      /* DISPLAY */
-      --display-size: 64px;
-      --display-line-height: 64px;
-      --display-letter-spacing: -0.64px;
+body {
+  font: var(--broedtekst-oso-sans);
+}
 
-      /* H1 */
-      --h1-size: 48px;
-      --h1-line-height: 52px;
-      --h1-letter-spacing: -0.24px;
+h1 {
+  font: var(--h1-oso-serif);
+}
 
-      /* H2 */
-      --h2-size: 36px;
-      --h2-line-height: 44px;
+h2 {
+  font: var(--h2-oso-sans);
+}
 
-      /* H3 */
-      --h3-size: 28px;
-      --h3-line-height: 36px;
-    }
-  }
+h3 {
+  font: var(--h3-oso-sans);
+}
+
+h1,
+h2,
+h3 {
+  margin-top: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
 }
