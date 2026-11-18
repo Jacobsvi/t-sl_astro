@@ -240,27 +240,41 @@ console.log("staffData", staffData);
 <style>
   /* SEKTIONERNES PLACERING OG AFSTAND */
   .udstyr-sektion,
-  .studio-sektion {
-    position: relative;
-    isolation: isolate;
-    margin-top: 64px;
-  }
+.studio-sektion {
+  position: relative;
+  isolation: isolate;
+  margin-top: 64px;
 
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr;
+}
+
+
+
+  
   /* FÆLLES LAYOUT FOR BEGGE GRUPPER AF CARDS */
   .book_udstyr_flex,
-  .book_studio_flex {
-    display: flex;
-    gap: 30px;
-    justify-content: center;
+.book_studio_flex {
+  width: calc(100% - 48px);
+  max-width: 1300px;
+  margin-inline: auto;
+  box-sizing: border-box;
 
-    /* Cards foran overskriftsbaggrunden */
-    position: relative;
-    z-index: 1;
+  display: flex;
+  gap: 30px;
+  justify-content: center;
 
-    /* Overlap med overskriftsbaggrunden */
-    margin-top: -40px;
-    padding-inline: 28px;
-  }
+  position: relative;
+  z-index: 1;
+
+  margin-top: -40px;
+  padding-inline: 28px;
+}
 
   /* DESKTOP */
   @media (min-width: 1024px) {
