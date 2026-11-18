@@ -2,238 +2,731 @@
 import kamera from "../images/kamera_img_index.jpg";
 import Lys from "../images/Lys_img_index.png";
 import Lyd from "../images/Lyd_img_index.png";
-import kit from "../images/Kit_img_index.png";
+import kit from "../images/KIT_img_index.png";
+import Podcast from "../images/Podcast.png";
+import Photo from "../images/Photo.png";
+import Labs7 from "../images/Labs_7.webp";
+import AltOmWorkshop from "../images/Alt_om.png";
+import EyeTrackingWorkshop from "../images/Eye tracking.png";
+import KameraWorkshop from "../images/Kamera.png";
 
-
+import TeamCard from "../components/Team_card.astro";
 
 import KnapPrimary from "../components/Knap_primary.astro";
 import KnapSecondary from "../components/Knap_secondary.astro";
 import UdstyrCardIndex from "../components/Udstyr_card_index.astro";
-import TeamCard from "../components/Team_card.astro";
-
-
+import StudioCardIndex from "../components/Studio_card_index.astro";
+import OverskriftBookUdstyr from "../components/Overskrift_BookUdstyr.astro";
+import Forside from "../components/Forside.astro";
 
 import Layout from "../layouts/layout.astro";
 
+/* API-INDSTILLINGER */
+const apiurl =
+  "https://uyxpjeeivebwemzealvq.supabase.co/rest/v1/";
 
-const apiurl = "https://uyxpjeeivebwemzealvq.supabase.co/rest/v1/";
+
 const equipmentTableName = "equipment";
 const staffTableName = "staff";
 const eventsTableName = "events";
 const studiocardsTableName = "studiocards";
 
-
-const key = "sb_publishable_2crJgmsXwxJPMYeBofiiEQ_Yrl1mHLo"
+const key =
+  "sb_publishable_2crJgmsXwxJPMYeBofiiEQ_Yrl1mHLo";
 
 const options = {
-	headers: {
-		apikey: key
-	},
-}
+  headers: {
+    apikey: key,
+  },
+};
 
+/* HENT STUDIOCARDS */
+const studiocardsResponse = await fetch(
+  apiurl + studiocardsTableName,
+  options
+);
 
-
-const studiocardsResponse = await fetch(apiurl + studiocardsTableName, options); 
-const studiocardsData =  await studiocardsResponse.json();
+const studiocardsData = await studiocardsResponse.json();
 
 console.log("studiocardsData", studiocardsData);
 
-const eventsResponse = await fetch(apiurl + eventsTableName, options); 
-const eventsData =  await eventsResponse.json();
+/* HENT EVENTS */
+const eventsResponse = await fetch(
+  apiurl + eventsTableName,
+  options
+);
+
+const eventsData = await eventsResponse.json();
 
 console.log("eventsData", eventsData);
 
+/* HENT UDSTYR */
+const equipmentResponse = await fetch(
+  apiurl + equipmentTableName,
+  options
+);
 
-
-const equipmentResponse = await fetch(apiurl + equipmentTableName, options); 
-const equipmentData =  await equipmentResponse.json();
+const equipmentData = await equipmentResponse.json();
 
 console.log("equipmentData", equipmentData);
 
+/* HENT MEDARBEJDERE */
+const staffResponse = await fetch(
+  apiurl + staffTableName,
+  options
+);
 
-
-const staffResponse = await fetch(apiurl + staffTableName, options); 
-const staffData =  await staffResponse.json();
+const staffData = await staffResponse.json();
 
 console.log("staffData", staffData);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-
-
 <Layout>
-  <h1>Tech & Story Lab</h1>
-  <p>Her kommer forsidens indhold.</p>
-</Layout>
-
-	</body>
+  <div class="index-sektioner">
+  <!-- FORSIDENS INTRO -->
+  <Forside />
 
 
 
+<section class="projekter" aria-labelledby="projekter-titel">
+  <div class="projekter-indhold">
+    <div class="projekter-tekst">
+      <h2 id="projekter-titel">
+        Se de studerendes projekter
+      </h2>
 
-	<KnapPrimary>Udstyr</KnapPrimary>
-	<KnapPrimary>Book Studio</KnapPrimary>
-	<KnapPrimary>Events / Workshops</KnapPrimary>
-	<KnapPrimary>Vejledning</KnapPrimary>
+      <p>Oplev nye idéer folde sig ud i Tech &amp; Story Lab</p>
 
+      <p>
+        Book udstyr helt gratis og se
+        <br />
+        dine ideer blive til virkelighed
+      </p>
 
-<br>
-<br>
-
-
-
-	<br>
-<br>
-
-<KnapSecondary>Læs Mere</KnapSecondary>
-</html>
-
-
-	<br>
-<br>
+      <KnapPrimary href="/inspiration/" compact>
+  Se mere
+</KnapPrimary>
+    </div>
 
 
-<section class="udstyr-sektion">
-  <div class="baggrundstekst" aria-hidden="true">
-    <h2 class="udstyr-titel">Book Udstyr</h2>
-  </div>
+   <div class="projekter-billeder">
+  <video
+  class="projekt-video"
+  autoplay
+  muted
+  loop
+  playsinline
+  controls
+>
+  <source src="/fotostudie.mp4" type="video/mp4" />
+</video>
 
-
-
-<div class="book_udstyr_flex">
-<UdstyrCardIndex>
-  <img slot="billede" src={kamera.src} alt="kamera"/>
-
-
-   <div slot="tekst">
-    <h2>Kamera</h2>
-  <p>
-	Har du brug for en masse udstyr til et større projekt,
-	så har vi helt sikkert en pakke der passer til dig.
-	Gå på opdagelse og find et kit der passer til dit projekt.
-</p>
-  </div>
-</UdstyrCardIndex>
-
-
-
-
-<UdstyrCardIndex>
-  <img slot="billede" src={Lys.src} alt="Lys"/>
-
-
-  <div slot="tekst">
-  <h2>Lys</h2>
-  <p>
-	Har du brug for en masse udstyr til et større projekt,
-	så har vi helt sikkert en pakke der passer til dig.
-	Gå på opdagelse og find et kit der passer til dit projekt.
- </p>
-  </div>
-</UdstyrCardIndex>
-
-
-
-
-<UdstyrCardIndex>
-  <img slot="billede" src={Lyd.src} alt="Lyd"/>
-
-
-  <div slot="tekst">
-  <h2>Lyd</h2>
-  <p>
-	Har du brug for en masse udstyr til et større projekt,
-	så har vi helt sikkert en pakke der passer til dig.
-	Gå på opdagelse og find et kit der passer til dit projekt.
- </p>
-  </div>
-</UdstyrCardIndex>
-
-
-
-
-<UdstyrCardIndex>
-  <img slot="billede" src={kit.src} alt="Kit"/>
-
-
-  <div slot="tekst">
-  <h2>KIT</h2>
-  <p>
-	Har du brug for en masse udstyr til et større projekt,
-	så har vi helt sikkert en pakke der passer til dig.
-	Gå på opdagelse og find et kit der passer til dit projekt.
- </p>
-  </div>
-</UdstyrCardIndex>
-
+ <img
+  class="projekt-billede"
+  src={Labs7.src}
+  alt="Studerendes arbejde i Tech & Story Lab"
+/>
 </div>
+  </div>
+</section>
+
+  
+
+  <!-- BOOK UDSTYR -->
+  <section class="udstyr-sektion">
+    <OverskriftBookUdstyr>
+      Book Udstyr
+    </OverskriftBookUdstyr>
+
+    <div class="book_udstyr_flex">
+      <!-- KAMERA -->
+      <UdstyrCardIndex>
+        <img
+          slot="billede"
+          src={kamera.src}
+          alt="Kamera"
+        />
+
+        <div slot="tekst">
+          <h2>Kamera</h2>
+
+          <p>
+            Har du brug for en masse udstyr til et større projekt,
+            så har vi helt sikkert en pakke der passer til dig.
+            Gå på opdagelse og find et kit der passer til dit projekt.
+          </p>
+        </div>
+      </UdstyrCardIndex>
+
+      <!-- LYS -->
+      <UdstyrCardIndex>
+        <img
+          slot="billede"
+          src={Lys.src}
+          alt="Lys"
+        />
+
+        <div slot="tekst">
+          <h2>Lys</h2>
+
+          <p>
+            Har du brug for en masse udstyr til et større projekt,
+            så har vi helt sikkert en pakke der passer til dig.
+            Gå på opdagelse og find et kit der passer til dit projekt.
+          </p>
+        </div>
+      </UdstyrCardIndex>
+
+      <!-- LYD -->
+      <UdstyrCardIndex>
+        <img
+          slot="billede"
+          src={Lyd.src}
+          alt="Lyd"
+        />
+
+        <div slot="tekst">
+          <h2>Lyd</h2>
+
+          <p>
+            Har du brug for en masse udstyr til et større projekt,
+            så har vi helt sikkert en pakke der passer til dig.
+            Gå på opdagelse og find et kit der passer til dit projekt.
+          </p>
+        </div>
+      </UdstyrCardIndex>
+
+      <!-- KIT -->
+      <UdstyrCardIndex>
+        <img
+          slot="billede"
+          src={kit.src}
+          alt="Kit med udstyr"
+        />
+
+        <div slot="tekst">
+          <h2>KIT</h2>
+
+          <p>
+            Har du brug for en masse udstyr til et større projekt,
+            så har vi helt sikkert en pakke der passer til dig.
+            Gå på opdagelse og find et kit der passer til dit projekt.
+          </p>
+        </div>
+      </UdstyrCardIndex>
+    </div>
+  </section>
+
+  <!-- BOOK STUDIO -->
+  <section class="studio-sektion">
+    <OverskriftBookUdstyr hoejre>
+      Book Studio
+    </OverskriftBookUdstyr>
+
+    <div class="book_studio_flex">
+      <!-- PODCAST -->
+      <StudioCardIndex>
+        <img
+          slot="billede"
+          src={Podcast.src}
+          alt="Podcast"
+        />
+
+        <div slot="tekst">
+          <h2>Podcast</h2>
+
+          <p>
+            Har du brug for en masse udstyr til et større projekt,
+            så har vi helt sikkert en pakke der passer til dig.
+            Gå på opdagelse og find et kit der passer til dit projekt.
+          </p>
+        </div>
+      </StudioCardIndex>
+
+      <!-- PHOTO -->
+      <StudioCardIndex>
+        <img
+          slot="billede"
+          src={Photo.src}
+          alt="Fotostudie"
+        />
+
+        <div slot="tekst">
+          <h2>Photo</h2>
+
+          <p>
+            Har du brug for en masse udstyr til et større projekt,
+            så har vi helt sikkert en pakke der passer til dig.
+            Gå på opdagelse og find et kit der passer til dit projekt.
+          </p>
+        </div>
+      </StudioCardIndex>
+
+      <!-- EYE TRACKING -->
+      <StudioCardIndex>
+        <img
+          slot="billede"
+          src={Labs7.src}
+          alt="Eye Tracking"
+        />
+
+        <div slot="tekst">
+          <h2>Eye Tracking</h2>
+
+          <p>
+            Har du brug for en masse udstyr til et større projekt,
+            så har vi helt sikkert en pakke der passer til dig.
+            Gå på opdagelse og find et kit der passer til dit projekt.
+          </p>
+        </div>
+      </StudioCardIndex>
+    </div>
+  </section>
+
+
+<section class="workshops" aria-labelledby="workshops-titel">
+  <div class="workshops-indhold">
+    <h2 id="workshops-titel">Events &amp; Workshops</h2>
+
+    <p class="workshops-intro">
+      Tilmeld dig vores events og workshops og kom godt fra start.
+      Du får en masse information om vores faciliteter og udstyr,
+      så du er klædt rigtigt på til dine kommende projekter.
+    </p>
+<div class="workshops-grid">
+   <article class="workshop-card">
+  <div class="workshop-billede">
+    <img src={AltOmWorkshop.src} alt="" />
+
+    <div class="workshop-tekst">
+      <h3>Alt om labbet</h3>
+
+      <p class="workshop-underoverskrift">
+        Introduktion
+      </p>
+
+      <p class="workshop-broedtekst">
+        Lær vores faciliteter og udstyr at kende.
+      </p>
+    </div>
+  </div>
+
+  <a class="workshop-link" href="/eventsandworkshops">
+    Book Workshop
+  </a>
+</article>
+      
+      <article class="workshop-card">
+  <div class="workshop-billede">
+    <img src={EyeTrackingWorkshop.src} alt="" />
+
+    <div class="workshop-tekst">
+      <h3>Alt om eye tracking</h3>
+
+      <p class="workshop-underoverskrift">
+        Introduktion
+      </p>
+
+      <p class="workshop-broedtekst">
+        Lær udstyret at kende.
+      </p>
+    </div>
+  </div>
+
+  <a class="workshop-link" href="/eventsandworkshops">
+    Book Workshop
+  </a>
+</article>
+<article class="workshop-card">
+  <div class="workshop-billede">
+    <img src={KameraWorkshop.src} alt="" />
+
+    <div class="workshop-tekst">
+      <h3>Alt om kameraer</h3>
+
+      <p class="workshop-underoverskrift">
+        Introduktion
+      </p>
+
+      <p class="workshop-broedtekst">
+        Lær vores udstyr at kende.
+      </p>
+    </div>
+  </div>
+
+  <a class="workshop-link" href="/eventsandworkshops">
+    Book Workshop
+  </a>
+</article>
+</div>
+  </div>
 </section>
 
 
 
 
-<TeamCard>  <div slot="photo" class="team-photo-fill" style="background-image: url('/frederick.jpg');"></div>
-  <div slot="name">Frederick Lehmann Rosling</div>
-  <div slot="heading">Informationer</div>
-  <div slot="title">Titel: Lab Manager</div>
-  <div slot="personal-mail">Personlig Mail: frfr@ek.dk</div>
-  <div slot="phone">Telefon: 46 46 04 42</div>
-  <div slot="mail">E-mail: Techandstorylab@ek.dk</div></TeamCard>
+<section class="team-sektion" aria-labelledby="team-titel">
+  <h2 id="team-titel">Mød vores team</h2>
+
+  <div class="team-grid">
+    {
+      staffData.map((person) => (
+        <TeamCard
+          billede={person.img}
+          navn={`${person.firstname} ${person.lastname}`}
+          titel={person.title}
+          speciale={person.speciale ?? ""}
+          telefon={person.phone}
+          email={person.email}
+        />
+      ))
+    }
+  </div>
+</section>
 
 
 
 
+
+</div>
+</Layout>
 
 <style>
+  /* SEKTIONERNES PLACERING OG AFSTAND */
+  .index-sektioner {
+  display: grid;
+  gap: 76px;
+}
+  .udstyr-sektion,
+  .studio-sektion {
+    position: relative;
+    isolation: isolate;
+  
+  }
 
+  /* FÆLLES LAYOUT FOR BEGGE GRUPPER AF CARDS */
+  .book_udstyr_flex,
+  .book_studio_flex {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
 
+    /* Cards foran overskriftsbaggrunden */
+    position: relative;
+    z-index: 1;
 
-	.book_udstyr_flex {
-		display: flex;
-		gap: 30px;
-		justify-content: center;
-	}
+    /* Overlap med overskriftsbaggrunden */
+    margin-top: -40px;
+    padding-inline: 28px;
+  }
 
+  .projekter {
+  background-color: white;
 
+  background-image: repeating-linear-gradient(
+    125deg,
+    #ff8d9d 0px,
+    #ff8d9d 260px,
+    rgb(255 141 157 / 80%) 260px,
+    rgb(255 141 157 / 80%) 520px
+  );
 
-
-
-  .udstyr-sektion {
-  position: relative;
-  isolation: isolate;
-  padding-top: 100px;
+  color: white;
 }
 
-.baggrundstekst {
-  position: absolute;
-  top: 0;
-  left: 0;
+.projekter-indhold {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: center;
+  gap: 40px;
+
+  max-width: 1512px;
+  margin-inline: auto;
+  padding: 40px 32px;
+}
+
+.projekter-tekst h2 {
+  font: var(--h1-oso-serif);
+  margin-bottom: 48px;
+}
+
+.projekter-tekst p {
+  font: var(--broedtekst-stor-oso-sans);
+  font-weight: 600;
+  margin-bottom: 28px;
+  
+}
+.projekter-billeder {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  aspect-ratio: 3 / 2;
+  min-width: 0;
+}
+
+.projekt-video,
+.projekt-billede {
+  display: block;
   width: 100%;
-  z-index: -1;
+  height: 100%;
+  min-width: 0;
+  object-fit: cover;
+  border: 4px solid var(--color-deep-plum);
+  border-radius: 16px;
+  position: relative;
+}
 
-  text-align: center;
-  font-family: var(--font-overskrift);
-  font-style: italic;
-  font-size: clamp(48px, 12vw, 200px);
-  line-height: 1;
-  color: var(--color-soft-pink);
-
-  pointer-events: none;
-
+.projekt-video {
+  grid-column: 2 / 5;
+  grid-row: 1 / 3;
+  z-index: 2;
+  transform: translate(20px, -20px);
   background-color: var(--color-deep-plum);
 }
 
-.cards {
-  position: relative;
+
+.projekt-billede {
+  grid-column: 1 / 4;
+  grid-row: 2 / 4;
   z-index: 1;
+  transform: translate(-20px, 20px);
 }
+
+
+/*Workshoops*/
+.workshops {
+  background-color: white;
+  background-image: repeating-linear-gradient(
+    55deg,
+    #ff8d9d 0px,
+    #ff8d9d 260px,
+    rgb(255 141 157 / 80%) 260px,
+    rgb(255 141 157 / 80%) 520px
+  );
+  color: white;
+}
+
+.workshops-indhold {
+  max-width: 1512px;
+  margin-inline: auto;
+  padding: 48px 40px;
+}
+
+.workshops-indhold > h2 {
+  font: var(--h1-oso-serif);
+  margin: 0 0 32px;
+}
+
+.workshops-intro {
+  font: var(--broedtekst-stor-oso-sans);
+  font-weight: 600;
+  margin: 0 0 48px;
+}
+
+.workshops-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: space-evenly;
+  gap: 32px;
+}
+
+.workshop-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
+  min-width: 0;
+  padding: 24px;
+  background-color: rgb(109 0 62 / 65%);
+  border: 1px solid var(--color-deep-plum);
+  border-radius: 12px;
+  box-shadow: 4px 6px 4px rgb(0 0 0 / 20%);
+  text-align: center;
+}
+
+
+.workshop-billede {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto;
+
+  width: 100%;
+  max-width: 240px;
+  min-height: 240px;
+  aspect-ratio: auto;
+  overflow: hidden;
+}
+
+
+.workshop-billede img,
+.workshop-tekst {
+  grid-area: 1 / 1;
+}
+
+
+.workshop-billede img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: blur(4px);
+}
+
+
+
+
+/* Teksten ligger oven på det hvide lag */
+.workshop-tekst {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+
+  min-width: 0;
+  padding: 12px;
+  color: var(--color-pure-white);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.workshop-tekst h3 {
+  font: var(--h1-oso-serif);
+  margin: 0;
+}
+
+.workshop-underoverskrift {
+  font: var(--h2-oso-sans);
+  margin: 0;
+}
+
+.workshop-broedtekst {
+  font: var(--broedtekst-lille-oso-sans);
+  margin: 0;
+}
+
+.workshop-link {
+  display: inline-block;
+  margin-top: auto;
+  padding: 8px 12px;
+
+  font: var(--knap-oso-serif);
+  color: var(--color-pure-white);
+  background-color: var(--color-orange);
+  border: 2px solid var(--color-pure-white);
+  outline: 2px solid var(--color-orange);
+
+  border-radius: 10px;
+  text-decoration: none;
+  transition: box-shadow 180ms ease, transform 180ms ease;
+}
+
+.workshop-link:hover {
+  text-decoration: none;
+   box-shadow: 0 5px 0 var(--color-deep-plum);
+  transform: translateY(-2px);
+  
+}
+
+.workshop-link:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 4px;
+}
+
+.team-sektion {
+  max-width: 1512px;
+  margin-inline: auto;
+  padding: 48px 32px;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+
+
+  /* DESKTOP */
+  @media (min-width: 1024px) {
+    .book_udstyr_flex,
+    .book_studio_flex {
+      margin-top: -70px;
+    }
+  }
+
+  /* MOBIL */
+  @media (max-width: 700px) {
+    .book_udstyr_flex,
+    .book_studio_flex {
+      display: grid;
+      gap: 12px;
+      padding-inline: 12px;
+    }
+
+    /* Udstyr: to cards pr. række */
+    .book_udstyr_flex {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    /* Studio: ét card pr. række */
+    .book_studio_flex {
+      grid-template-columns: minmax(0, 1fr);
+      justify-items: center;
+      gap: 24px;
+    }
+    .workshops-indhold {
+  padding: 32px 24px;
+}
+
+    .workshops-grid {
+  grid-template-columns: 1fr ;
+  justify-items: center;
+}
+
+.workshop-card {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 326px;
+}
+
+.projekter-indhold {
+  grid-template-columns: 1fr;
+}
+
+.projekter-billeder {
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  aspect-ratio: auto;
+  justify-items: center;
+  align-content: center;
+  gap: 20px;
+}
+
+.projekt-video,
+.projekt-billede {
+  grid-column: 1;
+  grid-row: auto;
+
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  aspect-ratio: 16 / 9;
+
+  transform: none;
+}
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+}
+  
 </style>
