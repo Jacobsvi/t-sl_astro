@@ -1,0 +1,113 @@
+<div class="team-card">
+  <div class="team-left">
+    <div class="team-photo">
+      <slot name="photo" />
+    </div>
+    <div class="team-name">
+      <slot name="name" />
+    </div>
+  </div>
+
+  <div class="team-info">
+    <div class="team-info-title">
+      <slot name="heading" />
+    </div>
+    <div class="team-info-line">
+      <slot name="title" />
+    </div>
+    <div class="team-info-line">
+      <slot name="personal-mail" />
+    </div>
+    <div class="team-info-line">
+      <slot name="phone" />
+    </div>
+    <div class="team-info-line">
+      <slot name="mail" />
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ---------- MOBIL (standard) ---------- */
+  .team-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+    background: var(--color-deep-plum);
+    border-radius: 18px;
+    color: #fff;
+  }
+
+  .team-left {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+  }
+
+  .team-photo {
+    width: 100%;
+    height: 220px;
+    border-radius: 20px;
+  }
+
+
+  .team-name {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .team-info {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .team-info-title {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 30px;
+  }
+
+  .team-info-line {
+    font-size: 15px;
+    font-weight: 300px
+  }
+
+  /* ---------- TABLET / DESKTOP ---------- */
+  @media (min-width: 768px) {
+    .team-card {
+      flex-direction: row;
+      max-width: 600px;
+    }
+
+    .team-left {
+      width: 262px;
+      flex-shrink: 0;
+    }
+
+    .team-photo {
+      width: 262px;
+      height: 190px;
+    }
+
+    .team-name {
+      font-size: 28px;
+    }
+
+    .team-info {
+      gap: 20px;
+      padding-top: 4px;
+    }
+
+    .team-info-title {
+      font-size: 36px;
+      margin-bottom: 4px;
+    }
+  }
+</style>

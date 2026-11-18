@@ -6,11 +6,12 @@ import kit from "../images/Kit_img_index.png";
 
 
 
-
-
 import KnapPrimary from "../components/Knap_primary.astro";
 import KnapSecondary from "../components/Knap_secondary.astro";
 import UdstyrCardIndex from "../components/Udstyr_card_index.astro";
+import TeamCard from "../components/Team_card.astro";
+
+
 
 import Layout from "../layouts/layout.astro";
 
@@ -176,6 +177,17 @@ console.log("staffData", staffData);
 
 </div>
 </section>
+
+
+
+
+<TeamCard>  <div slot="photo" class="team-photo-fill" style="background-image: url('/frederick.jpg');"></div>
+  <div slot="name">Frederick Lehmann Rosling</div>
+  <div slot="heading">Informationer</div>
+  <div slot="title">Titel: Lab Manager</div>
+  <div slot="personal-mail">Personlig Mail: frfr@ek.dk</div>
+  <div slot="phone">Telefon: 46 46 04 42</div>
+  <div slot="mail">E-mail: Techandstorylab@ek.dk</div></TeamCard>
 
 
 
