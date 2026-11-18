@@ -1,92 +1,87 @@
 ---
 import "../styles/global_styles.css";
+
+interface Props {
+  href?: string;
+}
+
+const { href = "/udstyr/" } = Astro.props;
 ---
 
-
-
-
-
-
-
-
 <div class="yderste_frame">
-    <div class="inderste_frame">
-        <button class="knap">
-            <slot/>
-        </button>
-    </div>
+  <div class="inderste_frame">
+    <a href={href} class="knap">
+      <slot />
+    </a>
+  </div>
 </div>
 
-
-
-
-
-
 <style>
+  .yderste_frame {
+    display: inline-block;
+    background-color: var(--color-orange);
+    padding: 3px;
+    margin: 0;
 
+    border-radius: 11px;
+    border-top-right-radius: 5px;
 
-
-.yderste_frame {
-display: inline-block;
-background-color: #FFB34A;
-padding: 3px;
-margin: 0%;
-border-radius: 11px;
-border-top-right-radius: 5px;
-box-shadow: 0 3px 0 #aaaaaa;
-}
-
-
-
-.inderste_frame {
-display: inline-block;
-background-color: white;
-padding: 2px;
-
-border-radius: 9px;
-border-top-right-radius: 3px;
-}
-
-
-
-
-.knap{
-background-color: #FFB34A;
-color: white;
-border: 0px;
-
-border-radius:7px;
-
-width: clamp(104px, 17vw, 151px);
-min-height: 29px;
-height: auto;
-
-padding: clamp(2px, 0.8vw, 4px) clamp(1px, 1.5vw, 2px);
-font: var(--knap-oso-serif);
-
-
-
-
-
-}
-
-
-
-.yderste_frame:hover {
-transform: scale(1.05);
-}
-
-
-
-
-@media (max-width: 1023px) {
-  .knap {
-    width: 74px;
-    padding: 3px 10px;
-
-
-        min-height: 15px;
+    box-shadow: 0 3px 0 #0000;
+    transition: transform 180ms ease;
   }
-}
-</style>
 
+  .inderste_frame {
+    display: inline-block;
+    background-color: black;
+    padding: 2px;
+
+    border-radius: 9px;
+    border-top-right-radius: 3px;
+  }
+
+  .knap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    width: clamp(104px, 17vw, 151px);
+    min-height: 29px;
+    height: auto;
+
+    padding:
+      clamp(2px, 0.8vw, 4px)
+      clamp(1px, 1.5vw, 2px);
+
+    background-color: var(--color-orange);
+    color: black;
+    border: 0;
+    border-radius: 7px;
+
+    font: var(--knap-oso-serif);
+    text-align: center;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+
+  .knap:visited {
+    color: black;
+  }
+
+  .yderste_frame:hover {
+    transform: scale(1.05);
+  }
+
+  .knap:focus-visible {
+    outline: 2px solid black;
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 1023px) {
+    .knap {
+      width: 74px;
+      padding: 3px 10px;
+      min-height: 15px;
+    }
+  }
+</style>

@@ -1,141 +1,183 @@
 ---
 import Layout from "../layouts/layout.astro";
 import StudioCard from "../components/help_card.astro";
+import TeamCard from "../components/Team_card.astro";
+import podcastBillede from "../images/Podcast.png";
+
+/* MEDARBEJDERNES FELTER I SUPABASE */
+type Staff = {
+  id: number;
+  firstname: string | null;
+  lastname: string | null;
+  title: string | null;
+  phone: string | null;
+  email: string | null;
+  img: string | null;
+  "Lab email": string | null;
+  Speciale: string | null;
+};
+
+/* API-INDSTILLINGER */
+const apiurl =
+  "https://uyxpjeeivebwemzealvq.supabase.co/rest/v1/";
+
+const key =
+  "sb_publishable_2crJgmsXwxJPMYeBofiiEQ_Yrl1mHLo";
+
+/* HENT MEDARBEJDERE */
+const staffResponse = await fetch(
+  apiurl + "staff?select=*&order=id.asc",
+  {
+    headers: {
+      apikey: key,
+    },
+  }
+);
+
+/* KONTROLLÉR API-SVARET */
+if (!staffResponse.ok) {
+  const errorText = await staffResponse.text();
+
+  console.error(
+    "Supabase-fejl:",
+    staffResponse.status,
+    errorText
+  );
+
+  throw new Error(
+    `Kunne ikke hente medarbejdere: ${staffResponse.status}`
+  );
+}
+
+const staffData: Staff[] = await staffResponse.json();
 ---
 
 <Layout>
-  <main class="help-side">
-
+  <div class="help-side">
+    <!-- INTRODUKTION -->
     <StudioCard>
       <Fragment slot="banner-light">Hjælp og </Fragment>
       <Fragment slot="banner-bold">vejledning</Fragment>
 
-      <img slot="photo" class="card-foto" src="/img/podcast.jpg" alt="To personer optager podcast med mikrofoner" />
+      <img
+        slot="photo"
+        class="card-foto"
+        src={podcastBillede.src}
+        alt="To personer optager podcast med mikrofoner"
+      />
 
-      <Fragment slot="heading-light">Find den rigtige person </Fragment>
-      <Fragment slot="heading-bold">der kan hjælpe dig</Fragment>
+      <Fragment slot="heading-light">
+        Find den rigtige person
+      </Fragment>
+
+      <Fragment slot="heading-bold">
+        der kan hjælpe dig
+      </Fragment>
 
       <Fragment slot="text-1">
-        Har du brug for hjælp til vejledning i udstyr, studios eller andre skære spørgsmål, så kom gerne ned til os. Vi har alle viden inden for alle studios og alt udstyr - nogen er dog mere specialiseret end andre.
+        Har du brug for hjælp til vejledning i udstyr,
+        studios eller andre skøre spørgsmål, så kom gerne
+        ned til os. Vi har alle viden inden for alle
+        studios og alt udstyr — nogen er dog mere
+        specialiserede end andre.
       </Fragment>
+
       <Fragment slot="text-2">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br />
-        Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Find den rette medarbejder nedenfor, og kontakt os
+        på telefon eller e-mail. Du er også velkommen til
+        at komme ned og tale med os.
       </Fragment>
     </StudioCard>
 
-    <!-- Podcast -->
-    <StudioCard>
-      <Fragment slot="banner-light">Få hjælp til </Fragment>
-      <Fragment slot="banner-bold">Podcast</Fragment>
-
-      <img slot="photo" class="card-foto" src="/frederick.jpg" alt="Frederick, podcast specialist" />
-
-      <Fragment slot="heading-light">Podcast specialist </Fragment>
-      <Fragment slot="heading-bold">Frederick</Fragment>
-
-      <Fragment slot="text-1">
-        Skriv til frederick ved spørgsmål ang. Podcast.<br />
-        Du er også velkommen til at komme ned og snakke med os.
-      </Fragment>
-      <Fragment slot="text-2">
-        Tlf. 46 46 04 42<br />
-        E-Mail: techandstorylab@ek.dk
-      </Fragment>
-    </StudioCard>
-
-    <!-- Kamera -->
-    <StudioCard>
-      <Fragment slot="banner-light">Få hjælp til </Fragment>
-      <Fragment slot="banner-bold">Kamera</Fragment>
-
-      <img slot="photo" class="card-foto card-foto--illustration" src="/img/detektiv.png" alt="Illustration af detektiv med forstørrelsesglas" />
-
-      <Fragment slot="heading-light">Kamera specialist </Fragment>
-      <Fragment slot="heading-bold">Mikki</Fragment>
-
-      <Fragment slot="text-1">
-        Skriv til frederick ved spørgsmål ang. Kamera.<br />
-        Du er også velkommen til at komme ned og snakke med os.
-      </Fragment>
-      <Fragment slot="text-2">
-        Tlf. 46 46 04 42<br />
-        E-Mail: techandstorylab@ek.dk
-      </Fragment>
-    </StudioCard>
-
-    <!-- xyz 1 -->
-    <StudioCard>
-      <Fragment slot="banner-light">Få hjælp til </Fragment>
-      <Fragment slot="banner-bold">xyz</Fragment>
-
-      <img slot="photo" class="card-foto card-foto--illustration" src="/img/detektiv.png" alt="Illustration af detektiv med forstørrelsesglas" />
-
-      <Fragment slot="heading-light">xxxx specialist </Fragment>
-      <Fragment slot="heading-bold">Frederick</Fragment>
-
-      <Fragment slot="text-1">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br />
-        Du er også velkommen til at komme ned og snakke med os.
-      </Fragment>
-      <Fragment slot="text-2">
-        Tlf. 46 46 04 42<br />
-        E-Mail: techandstorylab@ek.dk
-      </Fragment>
-    </StudioCard>
-
-    <!-- xyz 2 -->
-    <StudioCard>
-      <Fragment slot="banner-light">Få hjælp til </Fragment>
-      <Fragment slot="banner-bold">xyz</Fragment>
-
-      <img slot="photo" class="card-foto card-foto--illustration" src="/img/detektiv.png" alt="Illustration af detektiv med forstørrelsesglas" />
-
-      <Fragment slot="heading-light">xxxx specialist </Fragment>
-      <Fragment slot="heading-bold">Frederick</Fragment>
-
-      <Fragment slot="text-1">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br />
-        Du er også velkommen til at komme ned og snakke med os.
-      </Fragment>
-      <Fragment slot="text-2">
-        Tlf. 46 46 04 42<br />
-        E-Mail: techandstorylab@ek.dk
-      </Fragment>
-    </StudioCard>
-
-  </main>
+    <!-- MEDARBEJDERE: ÉT KORT PR. RÆKKE -->
+    <section
+      class="medarbejder-sektion"
+      aria-label="Medarbejdere i Tech & Story Lab"
+    >
+      {
+        staffData.length > 0 ? (
+          <div class="medarbejder-liste">
+            {staffData.map((person) => (
+              <TeamCard
+                billede={person.img}
+                navn={
+                  [person.firstname, person.lastname]
+                    .filter(Boolean)
+                    .join(" ") || "Medarbejder"
+                }
+                titel={person.title}
+                speciale={person.Speciale}
+                telefon={person.phone}
+                email={person.email}
+                labEmail={person["Lab email"]}
+              />
+            ))}
+          </div>
+        ) : (
+          <p class="tom-besked">
+            Der er ingen medarbejdere at vise lige nu.
+          </p>
+        )
+      }
+    </section>
+  </div>
 </Layout>
 
 <style>
-  /* ---------- MOBIL (standard) ---------- */
+  /* SIDENS OPSÆTNING */
   .help-side {
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    align-items: center;
+    gap: 40px;
+
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
     padding: 24px 16px 48px;
   }
 
-  /* Billeder der sendes ind i photo-sloten */
+  /* INTRODUKTIONENS BILLEDE */
   .card-foto {
     display: block;
     width: 100%;
     height: 100%;
+
     object-fit: cover;
     border-radius: 11px;
   }
 
-  /* Illustrationer skal ikke beskæres */
-  .card-foto--illustration {
-    object-fit: contain;
+  /* MEDARBEJDERE */
+  .medarbejder-sektion {
+    width: 100%;
+    max-width: 1100px;
+    min-width: 0;
+    margin-inline: auto;
   }
 
-  /* ---------- TABLET / DESKTOP ---------- */
+  .medarbejder-liste {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+
+    width: 100%;
+    min-width: 0;
+  }
+
+  .tom-besked {
+    margin: 0;
+    font: var(--broedtekst-oso-sans);
+  }
+
+  /* TABLET OG DESKTOP */
   @media (min-width: 768px) {
     .help-side {
-      align-items: center;
-      gap: 48px;
+      gap: 56px;
       padding: 48px 32px 64px;
+    }
+
+    .medarbejder-liste {
+      gap: 64px;
     }
   }
 </style>

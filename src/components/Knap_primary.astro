@@ -1,15 +1,31 @@
 ---
 import "../styles/global_styles.css";
 
-const { href = "/", compact = false } = Astro.props;
+interface Props {
+  href?: string;
+  compact?: boolean;
+  as?: "a" | "button";
+  "data-filter"?: string;
+  "aria-pressed"?: "true" | "false";
+  "aria-controls"?: string;
+}
+
+const {
+  href = "/",
+  compact = false,
+  as: Tag = "a",
+  ...attributes
+} = Astro.props;
 ---
 
-<a
-  href={href}
+<Tag
+  href={Tag === "a" ? href : undefined}
+  type={Tag === "button" ? "button" : undefined}
   class:list={["knap-primary", { "knap-compact": compact }]}
+  {...attributes}
 >
   <slot />
-</a>
+</Tag>
 
 <style>
   .knap-primary {
@@ -39,17 +55,21 @@ const { href = "/", compact = false } = Astro.props;
       inset 0 0 0 2px var(--color-soft-pink),
       0 3px 0 #aaaaaa;
 
+    cursor: pointer;
+
     transition:
       box-shadow 180ms ease,
       transform 180ms ease;
   }
 
   .knap-primary.knap-compact {
-  width: 170px;
-  height: 44px;
-  min-height: 44px;
-  padding: 6px 12px;
-}
+    width: 170px;
+    max-width: 100%;
+    height: 44px;
+    min-height: 44px;
+    padding: 6px 12px;
+  }
+
   .knap-primary:visited {
     color: var(--color-pure-white);
   }
@@ -58,11 +78,22 @@ const { href = "/", compact = false } = Astro.props;
     box-shadow:
       inset 0 0 0 2px var(--color-soft-pink),
       0 5px 0 #aaaaaa;
+
     transform: translateY(-2px);
   }
 
   .knap-primary:focus-visible {
     outline: 3px solid var(--color-soft-pink);
     outline-offset: 3px;
+  }
+
+  /* Det valgte filter */
+  .knap-primary[aria-pressed="true"] {
+    background-color: var(--color-soft-pink);
+    color: var(--color-deep-plum);
+
+    box-shadow:
+      inset 0 0 0 2px var(--color-deep-plum),
+      0 3px 0 #aaaaaa;
   }
 </style>
